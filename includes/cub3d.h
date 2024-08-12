@@ -6,12 +6,28 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/07/28 13:01:07 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:09:57 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include <fcntl.h>
+# include <stdarg.h>
+# include <stdbool.h>
+# include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <time.h>
+# include <sys/time.h>
+# include <math.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include "libft/includes/libft.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define WINDOW_TITLE "cub3d"
 # define WINDOW_WIDTH 2200
@@ -58,21 +74,14 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 #  define KEY_ESC				53
 # endif
 
-# include <fcntl.h>
-# include <stdarg.h>
-# include <stdbool.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <time.h>
-# include <sys/time.h>
-# include <math.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include "libft/includes/libft.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+// DEBUG MACROS
+# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+	__FILE__, __LINE__, getpid())
+/*# define PI(x) fprintf(stderr, "PI: %d\n", (x));
+# define PS(x) fprintf(stderr, "PS: %s\n", (x));
+# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
+# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
+*/
 
 typedef struct s_game
 {
@@ -82,15 +91,43 @@ typedef struct s_game
 
 typedef struct s_map
 {
-
+	char	**map;
+	char	**directions;
+	char	*line;
 }	t_map;
 
-// FUNCTION GAME SETTINGS
+// FUNCTION CUB3D /-\ srcs/cub3d.c
+void	ft_init_main(t_map *map, char *argv);
+
+// FUNCTION ERROR /-\ srcs/error/error.c
+void	ft_error(char *str, int count);
+void	ft_error_dir(t_map *map);
+
+// FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
 int		ft_destroy_escape(int keysim, t_game *game);
 int		ft_destroy_cross(t_game *game);
 int		ft_resize_window(t_map *map);
 
-// FUNCTION PARSING
-int		ft_parse_base(int argc, char **argv);
+// FUNCTION PARSING /-\ srcs/parsing/parsing.c
+int		ft_parse_base(t_map *map, int argc, char **argv);
+
+// FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
+void	ft_map_route(t_map *map, int count);
+
+// FUNCTION PARSING /-\ srcs/parsing/verify_direction.c
+void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction);
+
+// FUNCTION PARSING /-\ srcs/parsing/verify_map.c
+void	ft_verify_map(t_map *map, int count);
+
+// FUNCTION UTILS /-\ srcs/utils/function_utils.c
+int		ft_strlen_find(char *str, char c);
+int		ft_count_index(char **input);
+
+// FUNCTION UTILS /-\ srcs/utils/parsing_utils.c
+bool	ft_only_espace(const char *line);
+bool	ft_only_iswall(const char *line);
+int		ft_malloc_size(char *argv);
+int		ft_check_dir(t_map *map);
 
 #endif

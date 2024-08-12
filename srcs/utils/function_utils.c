@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   function_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/07 14:25:12 by shmoreno          #+#    #+#             */
+/*   Updated: 2024/08/12 11:26:27 by shmoreno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d.h"
+
+int	ft_strlen_find(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (c == 'N')
+		{
+			if (ft_isdigit(str[i]) || str[i] == '.')
+				return (i);
+		}
+		else if (str[i] == c && c == '.')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+// Count the number of elements in a 2D array
+int	ft_count_index(char **input)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (input[i] != NULL)
+	{
+		count++;
+		i++;
+	}
+	return (count);
+}

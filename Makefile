@@ -12,8 +12,13 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 SRC_1 = srcs/cub3d.c
 SRC_2 = srcs/game/settings.c \
-		srcs/parsing/parsing.c
-BONUS = 
+		srcs/parsing/parsing.c \
+		srcs/parsing/verify_direction.c \
+		srcs/parsing/verify_map.c \
+		srcs/errors/errors.c \
+		srcs/utils/parsing_utils.c \
+		srcs/utils/function_utils.c
+BONUS = srcs/parsing/parsing_map.c
 
 OBJ_1 = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRC_1))
 OBJ_2 = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRC_2))
