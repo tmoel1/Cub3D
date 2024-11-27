@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/08/11 15:09:57 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/11/27 08:48:30 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 # define WINDOW_HEIGHT 1080
 # define MAX_QUEUE_SIZE 1000
 # define NUM_XPM_FILES 49
+# define PLY_POV 60
+# define PLY_ROTATE 4
+# define PLY_WALK 20
 
 /*
 KEY_LEFT: 97 == "A" key on the keyboard.
@@ -101,7 +104,8 @@ void	ft_init_main(t_map *map, char *argv);
 
 // FUNCTION ERROR /-\ srcs/error/error.c
 void	ft_error(char *str, int count);
-void	ft_error_dir(t_map *map);
+void	ft_error_dir(t_map *map, char c, int i);
+void	ft_error_rgb(void);
 
 // FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
 int		ft_destroy_escape(int keysim, t_game *game);
@@ -110,6 +114,7 @@ int		ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
 int		ft_parse_base(t_map *map, int argc, char **argv);
+void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
 void	ft_map_route(t_map *map, int count);

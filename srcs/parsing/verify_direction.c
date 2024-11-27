@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:57:21 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/08/12 11:22:16 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/11/27 09:36:06 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	ft_dir_base(t_map *map, int *count, int index, int size)
 	}
 }
 
+// Modifier peut-etre car premiere ligne return invalid direction
 void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction)
 {
-	if (ft_only_iswall(line) && !*out_direction) // Modifier peut-etre car premiere ligne return invalid direction
+	if (ft_only_iswall(line) && !*out_direction)
 		*out_direction = true;
-	printf("line: %s\n", line);
-	printf("out_direction: %d\n", *out_direction);
 	if (!*out_direction)
 	{
 		count[6]++;
