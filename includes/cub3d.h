@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 13:30:19 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:29:40 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,13 @@ typedef struct s_ray
 	double	raydiry;
 	double	sidedistx;
 	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
 	int		mapx;
 	int		mapy;
-	int		x
+	int		stepx;
+	int		stepy;
+	int		x;
 }	t_ray;
 
 typedef struct s_map
