@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 15:29:40 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:12:38 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ typedef struct s_game
 {
 	void	*p_mlx_init;
 	void	*p_mlx_window;
+	t_ply	*ply;
+	t_ray	*ray;
+	t_map	*map;
 }	t_game;
 
 typedef struct s_ply
@@ -116,11 +119,14 @@ typedef struct s_ray
 	double	sidedisty;
 	double	deltadistx;
 	double	deltadisty;
+	double	perpwalldist;
 	int		mapx;
 	int		mapy;
 	int		stepx;
 	int		stepy;
+	int		side;
 	int		x;
+	int		hit;
 }	t_ray;
 
 typedef struct s_map
@@ -128,8 +134,6 @@ typedef struct s_map
 	char	**map;
 	char	**directions;
 	char	*line;
-	t_ply	*ply;
-	t_ray	*ray;
 }	t_map;
 
 typedef struct s_img
@@ -144,7 +148,7 @@ typedef struct s_img
 }				t_img;
 
 // FUNCTION CUB3D /-\ srcs/cub3d.c
-void	ft_init_main(t_map *map, char *argv);
+void	ft_init_main(t_game *game, char *argv);
 
 // FUNCTION ERROR /-\ srcs/error/error.c
 void	ft_error(char *str, int count);
@@ -157,17 +161,17 @@ int		ft_destroy_cross(t_game *game);
 int		ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
-int		ft_parse_base(t_map *map, int argc, char **argv);
+int		ft_parse_base(int argc, char **argv, t_map *map, t_game *game);
 void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
-void	ft_map_route(t_map *map, int count);
+void	ft_map_route(t_map *map, t_game *game, int count);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_direction.c
 void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_map.c
-void	ft_verify_map(t_map *map, int count);
+void	ft_verify_map(t_map *map, t_game *game, int count);
 
 // FUNCTION UTILS /-\ srcs/utils/function_utils.c
 int		ft_strlen_find(char *str, char c);

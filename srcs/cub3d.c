@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/30 18:14:07 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:43:54 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ void	ft_hook(t_game *game)
 // directions[3][0] == EA
 // directions[4][0] == F
 // directions[5][0] == C
-void	ft_init_main(t_map *map, char *argv)
+void	ft_init_main(t_game *game, char *argv)
 {
 	int	i;
 
 	i = -1;
-	map->map = malloc(sizeof(char *) * ft_malloc_size(argv) + 1);
-	map->line = NULL;
-	map->directions = malloc(sizeof(char *) * 6);
-	map->ply->pos_x = 0.0;
-	map->ply->pos_y = 0.0;
-	map->ply->dir_angle = 0.0;
-	map->ply->angle = 0.0;
-	map->ply->pov_rad = 0.0;
-	if (!map->directions)
+	game->map->map = malloc(sizeof(char *) * ft_malloc_size(argv) + 1);
+	game->map->line = NULL;
+	game->map->directions = malloc(sizeof(char *) * 6);
+	game->ply->pos_x = 0.0;
+	game->ply->pos_y = 0.0;
+	game->ply->dir_angle = 0.0;
+	game->ply->angle = 0.0;
+	game->ply->pov_rad = 0.0;
+	if (!game->map->directions)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	while (++i < 6)
-		map->directions[i] = NULL;
+		game->map->directions[i] = NULL;
 	i = -1;
 	while (++i < ft_malloc_size(argv))
-		map->map[i] = NULL;
+		game->map->map[i] = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -56,9 +56,12 @@ int	main(int argc, char **argv)
 	t_game	game;
 	t_map	map;
 	t_ply	ply;
+	t_ray	ray;
 
-	map.ply = &ply;
-	if (ft_parse_base(&map, argc, argv) == 1)
+	game.ply = &ply;
+	game.ray = &ray;
+	game.map = &map;
+	if (ft_parse_base(argc, argv, &map, &game) == 1)
 		exit(EXIT_FAILURE);
 	game.p_mlx_init = mlx_init();
 	if (!game.p_mlx_init)

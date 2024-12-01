@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:00:19 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/27 13:12:25 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:51:31 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	ft_condition_route(t_map *map, int k, int i, int count)
 	return (1);
 }
 
-void	ft_map_route(t_map *map, int count)
+void	ft_map_route(t_map *map, t_game *game, int count)
 {
 	int		i;
 	int		k;
 
 	k = 0;
-	ft_verify_map(map, count);
+	ft_verify_map(map, game, count);
 	if (!ft_only_iswall(map->map[0])
 		|| !ft_only_iswall(map->map[ft_count_index(map->map) - 1]))
 		ft_error("First or last line does not contain only walls", count);
