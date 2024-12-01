@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/27 08:48:30 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 13:30:19 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@
 # define WINDOW_TITLE "cub3d"
 # define WINDOW_WIDTH 2200
 # define WINDOW_HEIGHT 1080
+# define TILE_SIZE 30
 # define MAX_QUEUE_SIZE 1000
 # define NUM_XPM_FILES 49
 # define PLY_POV 60
-# define PLY_ROTATE 4
-# define PLY_WALK 20
+# define PLY_ROTATE 0.04
+# define PLY_WALK 4
+# define M_PI 3.14159265358979323846
 
 /*
 KEY_LEFT: 97 == "A" key on the keyboard.
@@ -92,12 +94,50 @@ typedef struct s_game
 	void	*p_mlx_window;
 }	t_game;
 
+typedef struct s_ply
+{
+	float	pos_x;
+	float	pos_y;
+	float	dir_angle;
+	float	pov_rad;
+	float	angle;
+}	t_ply;
+
+typedef struct s_ray
+{
+	double	planex;
+	double	planey;
+	double	dirx;
+	double	diry;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	sidedistx;
+	double	sidedisty;
+	int		mapx;
+	int		mapy;
+	int		x
+}	t_ray;
+
 typedef struct s_map
 {
 	char	**map;
 	char	**directions;
 	char	*line;
+	t_ply	*ply;
+	t_ray	*ray;
 }	t_map;
+
+typedef struct s_img
+{
+	int		height;
+	int		width;
+	void	*i;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}				t_img;
 
 // FUNCTION CUB3D /-\ srcs/cub3d.c
 void	ft_init_main(t_map *map, char *argv);

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/08/11 14:13:53 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:14:07 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	ft_init_main(t_map *map, char *argv)
 	map->map = malloc(sizeof(char *) * ft_malloc_size(argv) + 1);
 	map->line = NULL;
 	map->directions = malloc(sizeof(char *) * 6);
+	map->ply->pos_x = 0.0;
+	map->ply->pos_y = 0.0;
+	map->ply->dir_angle = 0.0;
+	map->ply->angle = 0.0;
+	map->ply->pov_rad = 0.0;
 	if (!map->directions)
 	{
 		printf("Error: malloc failed\n");
@@ -42,7 +47,6 @@ void	ft_init_main(t_map *map, char *argv)
 	while (++i < 6)
 		map->directions[i] = NULL;
 	i = -1;
-	printf("malloc size: %d\n", ft_malloc_size(argv));
 	while (++i < ft_malloc_size(argv))
 		map->map[i] = NULL;
 }
@@ -51,7 +55,9 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 	t_map	map;
+	t_ply	ply;
 
+	map.ply = &ply;
 	if (ft_parse_base(&map, argc, argv) == 1)
 		exit(EXIT_FAILURE);
 	game.p_mlx_init = mlx_init();

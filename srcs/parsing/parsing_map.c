@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:00:19 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/08/12 10:32:23 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:12:25 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,34 @@ void	ft_condition_bis(t_map *map, int k, int i, int count)
 {
 	if (i == ft_strlen(map->map[k]) - 1
 		&& map->map[k][i] != '1' && map->map[k][i] != ' '
-	&& map->map[k][i] != '\t')
+	&& map->map[k][i] != '\t' && map->map[k][i] != '\n')
 	{
-		ft_error("Invalid map:", count);
+		ft_error("Invalid map", count);
 	}
 }
 
 int	ft_condition_route(t_map *map, int k, int i, int count)
 {
 	if (i == 0 && !ft_notwall(map->map[k][i]))
-		ft_error("Invalid map:", count);
+		ft_error("Invalid map", count);
 	else if (i > 0 && i < ft_strlen(map->map[k]) - 1)
 	{
 		if (map->map[k][i] == ' ' && k > 0
 			&& map->map[k - 1] != NULL
 			&& i < ft_strlen(map->map[k - 1]) - 1
 			&& !ft_notwall(map->map[k - 1][i]))
-			ft_error("Invalid map:", (count - 1));
+			ft_error("Invalid map", (count - 1));
 		else if (map->map[k][i] == ' '
 			&& k < ft_count_index(map->map) - 1
 			&& map->map[k + 1] != NULL
 			&& i < ft_strlen(map->map[k + 1]) - 1
 			&& !ft_notwall(map->map[k + 1][i]))
-			ft_error("Invalid map:", count + 1);
+			ft_error("Invalid map", count + 1);
 		else if (map->map[k][i] == ' '
 			&& (((i + 1) < ft_strlen(map->map[k]) - 1
 			&& !ft_notwall(map->map[k][i + 1]))
 			|| ((i - 1) >= 0 && !ft_notwall(map->map[k][i - 1]))))
-			ft_error("Invalid map:", count);
+			ft_error("Invalid map", count);
 	}
 	ft_condition_bis(map, k, i, count);
 	return (1);
@@ -61,7 +61,6 @@ void	ft_map_route(t_map *map, int count)
 	int		i;
 	int		k;
 
-	i = -1;
 	k = 0;
 	ft_verify_map(map, count);
 	if (!ft_only_iswall(map->map[0])
