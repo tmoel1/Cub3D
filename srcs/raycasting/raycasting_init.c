@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:44:51 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:14:57 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:18:35 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_init_raycast(t_game *game)
 
 void	ft_init(t_game *game)
 {
-	game->ray->camerax = 2 * game->ray->x / (double)WINDOW_WIDTH - 1;
+	game->ray->camerax = 2 * game->ray->x / (double)WIN_WIDTH - 1;
 }
 
 void	ft_dda_algo(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:12:38 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:23:14 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@
 # include <X11/keysym.h>
 
 # define WINDOW_TITLE "cub3d"
-# define WINDOW_WIDTH 2200
-# define WINDOW_HEIGHT 1080
-# define TILE_SIZE 30
+# define WIN_WIDTH 2200
+# define WIN_HEIGHT 1080
 # define MAX_QUEUE_SIZE 1000
 # define NUM_XPM_FILES 49
 # define PLY_POV 60

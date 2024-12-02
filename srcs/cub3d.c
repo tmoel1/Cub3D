@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 16:43:54 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:31:38 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int	main(int argc, char **argv)
 	game.p_mlx_init = mlx_init();
 	if (!game.p_mlx_init)
 		return (EXIT_FAILURE);
-	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WINDOW_WIDTH,
-			WINDOW_HEIGHT, WINDOW_TITLE);
+	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WIN_WIDTH,
+			WIN_HEIGHT, WINDOW_TITLE);
 	if (!game.p_mlx_window)
 	{
 		return (EXIT_FAILURE);

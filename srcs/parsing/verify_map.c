@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:50 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 16:52:26 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:21:27 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_init_coords(t_map *map, t_game *game, int k, int i)
 	if (map->map[k][i] == 'N' || map->map[k][i] == 'S'
 		|| map->map[k][i] == 'E' || map->map[k][i] == 'W')
 	{
-		game->ply->pos_x = (float)i * TILE_SIZE + TILE_SIZE / 2;
-		game->ply->pos_y = ((float)k + 1) * TILE_SIZE + TILE_SIZE / 2;
+		game->ply->pos_x = (float)i;
+		game->ply->pos_y = (float)k + 1;
 		if (map->map[k][i] == 'N')
 		{
 			game->ply->dir_angle = 270.0;
