@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:23:14 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:19:57 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@
 # define PLY_ROTATE 0.04
 # define PLY_WALK 4
 # define M_PI 3.14159265358979323846
+
+# define NORTH_WALL_TEXTURE //needs doing
+# define SOUTH_WALL_TEXTURE //needs doing
+# define EAST_WALL_TEXTURE //needs doing
+# define WEST_WALL_TEXTURE //needs doing
+# define CEILING_COLOR // needs doing
+# define FLOOR_COLOR // needs doing
 
 /*
 KEY_LEFT: 97 == "A" key on the keyboard.
@@ -87,19 +94,27 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 */
 
-typedef struct s_game
-{
-	void	*p_mlx_init;
-	void	*p_mlx_window;
-	t_ply	*ply;
-	t_ray	*ray;
-	t_map	*map;
-}	t_game;
-
 typedef struct s_ply
 {
-	float	pos_x;
-	float	pos_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x; // Vecteur de plan de camera X
+	double	plane_y; // Vecteur de plan de camera Y
+	double	frame_time;
+	double	move_speed;
+	double	rotate_speed;
+	double	time;
+	double	old_time;
+
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	right;
+	bool	left;
+
 	float	dir_angle;
 	float	pov_rad;
 	float	angle;
@@ -107,10 +122,6 @@ typedef struct s_ply
 
 typedef struct s_ray
 {
-	double	planex;
-	double	planey;
-	double	dirx;
-	double	diry;
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
@@ -126,6 +137,9 @@ typedef struct s_ray
 	int		side;
 	int		x;
 	int		hit;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }	t_ray;
 
 typedef struct s_map
@@ -144,7 +158,19 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
-}				t_img;
+}	t_img;
+
+typedef struct s_game
+{
+	void		*p_mlx_init;
+	void		*p_mlx_window;
+	void		*ptr_to_image;
+	t_ray		*ray;
+	t_map		*map;
+	t_ply		*ply;
+}	t_game;
+
+
 
 // FUNCTION CUB3D /-\ srcs/cub3d.c
 void	ft_init_main(t_game *game, char *argv);
@@ -172,9 +198,25 @@ void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction);
 // FUNCTION PARSING /-\ srcs/parsing/verify_map.c
 void	ft_verify_map(t_map *map, t_game *game, int count);
 
+// FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_init.c
+void	ft_init_raycast(t_game *game);
+void	ft_init(t_game *game);
+void	ft_dda_algo(t_game *game);
+
+// FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_calcul.c
+void	process_dda(t_game *game);
+void	calculate_line_height(t_game *game);
+void	update_frame_time(t_game *game);
+
+// FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_draw.c
+void	cast_rays(t_game *game);
+
 // FUNCTION UTILS /-\ srcs/utils/function_utils.c
 int		ft_strlen_find(char *str, char c);
 int		ft_count_index(char **input);
+
+// FUNCTION UTILS MLX /-\ srcs/utils-mlx/function_mlx.c
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 // FUNCTION UTILS /-\ srcs/utils/parsing_utils.c
 bool	ft_only_espace(const char *line);

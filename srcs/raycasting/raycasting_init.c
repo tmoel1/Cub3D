@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:44:51 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:18:35 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:16:57 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_init_raycast(t_game *game)
 {
-	game->ray->dirx = 0.0;
-	game->ray->diry = 0.0;
-	game->ray->planex = 0.0;
-	game->ray->planey = 0.0;
+	game->ply->dir_x = 0.0;
+	game->ply->dir_y = 0.0;
+	game->ply->plane_x = 0.0;
+	game->ply->plane_y = 0.0;
 	game->ray->raydirx = 0.0;
 	game->ray->raydiry = 0.0;
 	game->ray->sidedistx = 0.0;
@@ -39,10 +39,10 @@ void	ft_dda_algo(t_game *game)
 {
 	game->ray->mapx = (int)game->ply->pos_x;
 	game->ray->mapy = (int)game->ply->pos_x;
-	game->ray->raydirx = game->ray->dirx + \
-		game->ray->planex * game->ray->camerax;
-	game->ray->raydiry = game->ray->diry + \
-		game->ray->planey * game->ray->camerax;
+	game->ray->raydirx = game->ply->dir_x + \
+		game->ply->plane_x * game->ray->camerax;
+	game->ray->raydiry = game->ply->dir_y + \
+		game->ply->plane_y * game->ray->camerax;
 	init_deltadist(game);
 	set_step(game);
 }

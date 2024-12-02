@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:14:51 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:10:00 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,33 @@ void	process_dda(t_game *game)
 				game->ray->perpwalldist = (game->ray->sidedisty - \
 				game->ray->deltadisty);
 		}
+	}
+}
+void	calculate_line_height(t_game *game)
+{
+	game->ray->line_height = (int)(WIN_HEIGHT / game->ray->perpwalldist);
+	game->ray->draw_start = -game->ray->line_height / 2 + WIN_HEIGHT / 2;
+	if (game->ray->draw_start < 0)
+		game->ray->draw_start = 0;
+	game->ray->draw_end = game->ray->line_height / 2 + WIN_HEIGHT / 2;
+	if (game->ray->draw_end >= WIN_HEIGHT)
+		game->ray->draw_end = WIN_HEIGHT - 1;
+}
+
+void	update_frame_time(t_game *game)
+{
+	game->ply->old_time = game->ply->time;
+	game->ply->time = get_time();
+	game->ply->frame_time = (game->ply->time - game->ply->old_time) / 1000.0;
+	game->ply->move_speed = game->ply->frame_time * 5.0; //chiffres  exactes a definir
+	game->ply->rotate_speed = game->ply->frame_time * 3.0; //pareil
+}
+
+static	get_time(void)
+{
+	{
+		struct timeval	time;
+		gettimeofday(&time, NULL);
+		return (time.tv_sec * 1000.0 + time.tv_usec / 1000.0);
 	}
 }
