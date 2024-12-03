@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:50 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:21:27 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:15:28 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_verify_caracter(char map_c, int count, int *verify_dir)
 		ft_error("Invalid character in the map", count);
 }
 
-void	ft_verify_map(t_map *map, t_game *game, int count)
+void	ft_verify_map(t_game *game, int count)
 {
 	char	map_c;
 	int		i;
@@ -60,16 +60,16 @@ void	ft_verify_map(t_map *map, t_game *game, int count)
 
 	k = -1;
 	verify_dir = 0;
-	while (map->map[++k] != NULL)
+	while (game->map->map[++k] != NULL)
 	{
 		i = -1;
 		count++;
-		if (ft_only_espace(map->map[k]) || ft_strlen(map->map[k]) == 0)
+		if (ft_only_espace(game->map->map[k]) || ft_strlen(game->map->map[k]) == 0)
 			ft_error("Empty line between map", count);
-		while (map->map[k][++i] != '\0')
+		while (game->map->map[k][++i] != '\0')
 		{
-			map_c = map->map[k][i];
-			ft_init_coords(map, game, k, i);
+			map_c = game->map->map[k][i];
+			ft_init_coords(game->map, game, k, i);
 			ft_verify_caracter(map_c, count, &verify_dir);
 		}
 	}

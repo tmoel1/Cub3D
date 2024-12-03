@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/02 14:19:57 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:34:21 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,17 +186,17 @@ int		ft_destroy_cross(t_game *game);
 int		ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
-int		ft_parse_base(int argc, char **argv, t_map *map, t_game *game);
+int		ft_parse_base(t_game *game, int argc, char **argv);
 void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
-void	ft_map_route(t_map *map, t_game *game, int count);
+void	ft_map_route(t_game *game, int count);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_direction.c
 void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_map.c
-void	ft_verify_map(t_map *map, t_game *game, int count);
+void	ft_verify_map(t_game *game, int count);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_init.c
 void	ft_init_raycast(t_game *game);

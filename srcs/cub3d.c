@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 17:31:38 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:55:06 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	game.ply = &ply;
 	game.ray = &ray;
 	game.map = &map;
-	if (ft_parse_base(argc, argv, &map, &game) == 1)
+	if (ft_parse_base(&game, argc, argv) == 1)
 		exit(EXIT_FAILURE);
 	game.p_mlx_init = mlx_init();
 	if (!game.p_mlx_init)

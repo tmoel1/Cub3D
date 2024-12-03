@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/01 16:46:59 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:26:51 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_map(t_map *map, bool out_direction, int *i)
 	}
 }
 
-void	ft_init_parsing(t_map *map, t_game *game, char *argv)
+void	ft_init_parsing(t_game *game, char *argv)
 {
 	bool	out_direction;
 	int		count[7];
@@ -40,28 +40,28 @@ void	ft_init_parsing(t_map *map, t_game *game, char *argv)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		(printf("Error: Invalid file\n"), exit(EXIT_FAILURE));
-	map->line = get_next_line(fd);
-	while (map->line != NULL)
+	game->map->line = get_next_line(fd);
+	while (game->map->line != NULL)
 	{
-		ft_init_dir(map, map->line, count, &out_direction);
-		ft_init_map(map, out_direction, &i);
-		(free(map->line), map->line = get_next_line(fd));
+		ft_init_dir(game->map, game->map->line, count, &out_direction);
+		ft_init_map(game->map, out_direction, &i);
+		(free(game->map->line), game->map->line = get_next_line(fd));
 	}
 	close(fd);
-	ft_error_dir(map, 'D', 0);
+	ft_error_dir(game->map, 'D', 0);
 	if (!out_direction)
 		(printf("Error: No map\n"), exit(EXIT_FAILURE));
-	ft_map_route(map, game, count[6]);
+	ft_map_route(game->map, game, count[6]);
 }
 
-int	ft_parse_base(t_map *map, t_game *game, int argc, char **argv)
+int	ft_parse_base(t_game *game, int argc, char **argv)
 {
 	if (argc != 2)
 		return (printf("Error: Invalid number of arguments\n"), EXIT_FAILURE);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
 		return (printf("Error: Invalid file extension\n"), EXIT_FAILURE);
-	ft_init_main(map, argv[1]);
-	ft_init_parsing(map, game, argv[1]);
+	ft_init_main(game, argv[1]);
+	ft_init_parsing(game, argv[1]);
 	return (0);
 }
 
