@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/03 10:34:21 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:13:53 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 #  define KEY_RIGHT		100
 #  define KEY_UP       	119
 #  define KEY_DOWN		115
+#  define KEY_W			119
+#  define KEY_A			97
+#  define KEY_S			115
+#  define KEY_D			100
 #  define KEY_ARROW_LEFT	 	65361
 #  define KEY_ARROW_RIGHT		65363
 #  define KEY_ARROW_UP			65362
