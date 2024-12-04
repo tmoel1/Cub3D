@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/03 10:55:06 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:04:19 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,12 @@ int	main(int argc, char **argv)
 	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WIN_WIDTH,
 			WIN_HEIGHT, WINDOW_TITLE);
 	if (!game.p_mlx_window)
-	{
 		return (EXIT_FAILURE);
-	}
+	game.img.i = mlx_new_image(game.p_mlx_init, WIN_WIDTH, WIN_HEIGHT);
+	if (!game.img.i)
+		return (EXIT_FAILURE);
+	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
+		&game.img.line_len, &game.img.endian);
 	//mlx_loop_hook(game.p_mlx_init, &ft_update_game, &map);
 	ft_hook(&game);
 	mlx_loop(game.p_mlx_init);

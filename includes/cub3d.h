@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 12:13:53 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:01:31 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@
 # define PLY_WALK 4
 # define M_PI 3.14159265358979323846
 
-# define NORTH_WALL_TEXTURE //needs doing
-# define SOUTH_WALL_TEXTURE //needs doing
-# define EAST_WALL_TEXTURE //needs doing
-# define WEST_WALL_TEXTURE //needs doing
-# define CEILING_COLOR // needs doing
-# define FLOOR_COLOR // needs doing
+#define NORTH_WALL_TEXTURE	0xFFFFFF // White
+#define SOUTH_WALL_TEXTURE	0xFF0000 // Red
+#define EAST_WALL_TEXTURE	0x00FF00 // Green
+#define WEST_WALL_TEXTURE	0x0000FF // Blue
+#define CEILING_COLOR		0x87CEEB // Sky blue
+#define FLOOR_COLOR			0x8B4513 // Brown
 
 /*
 KEY_LEFT: 97 == "A" key on the keyboard.
@@ -144,6 +144,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int		color;
 }	t_ray;
 
 typedef struct s_map
@@ -169,6 +170,7 @@ typedef struct s_game
 	void		*p_mlx_init;
 	void		*p_mlx_window;
 	void		*ptr_to_image;
+	t_img		img;
 	t_ray		*ray;
 	t_map		*map;
 	t_ply		*ply;

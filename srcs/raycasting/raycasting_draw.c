@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/02 14:17:55 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:09:34 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 // need to add prototypes
 
-static void	choose_wall_tetxure(t_game *game)
+static void	choose_wall_texture(t_game *game)
 {
 	if (game->ray->side == 0)
 	{
 		if (game->ray->raydirx > 0)
-			game->ray->color = SOUTH_WALL_TEXTURE; // a definir dans .h (ray.color et #defines)
+			game->ray->color = WEST_WALL_TEXTURE; // a definir dans .h (ray.color et #defines)
 		else
-			game->ray->color = WEST_WALL_TEXTURE;
+			game->ray->color = EAST_WALL_TEXTURE;
 	}
 	else
 	{
 		if (game->ray->raydiry > 0)
-			game->ray->color = SOUTH_WALL_TEXTURE;
-		else
 			game->ray->color = NORTH_WALL_TEXTURE;
+		else
+			game->ray->color = SOUTH_WALL_TEXTURE;
 	}
 }
 
@@ -66,9 +66,9 @@ void	cast_rays(t_game *game)
 		ft_dda_algo(game);
 		process_dda(game);
 		calculate_line_height(game);
-		choose_wall_tetxure(game);
+		choose_wall_texture(game);
 		draw_vertical_line(game);
 		game->ray->x++;
 	}
-	// mlx_put_img_to_window() ou my_mlx_pixel_put()??
+	mlx_put_image_to_window(game->p_mlx_init, game->p_mlx_window, game->img.i, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/03 10:26:51 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:16:21 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_init_parsing(t_game *game, char *argv)
 	ft_error_dir(game->map, 'D', 0);
 	if (!out_direction)
 		(printf("Error: No map\n"), exit(EXIT_FAILURE));
-	ft_map_route(game->map, game, count[6]);
+	ft_map_route(game, count[6]);
 }
 
 int	ft_parse_base(t_game *game, int argc, char **argv)
