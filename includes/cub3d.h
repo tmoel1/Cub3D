@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 13:01:31 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:49:39 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 # ifdef __linux__
 #  include "../minilibx-linux/mlx.h"
 #  define OS "linux"
-#  define KEY_LEFT		97
-#  define KEY_RIGHT		100
-#  define KEY_UP       	119
-#  define KEY_DOWN		115
+//#  define KEY_LEFT		97
+//#  define KEY_RIGHT		100
+//#  define KEY_UP       	119
+//#  define KEY_DOWN		115
 #  define KEY_W			119
 #  define KEY_A			97
 #  define KEY_S			115
@@ -217,9 +217,28 @@ void	update_frame_time(t_game *game);
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_draw.c
 void	cast_rays(t_game *game);
 
+// FUNCTION PLAYER /-\ srcs/player/intit_player_controls.c
+int 	ft_update_game(void *param);
+void	init_player(t_game *game);
+
+// FUNCTION PLAYER /-\ srcs/player/player_movement.c
+void	move_forward(t_game *game);
+void	move_backwards(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+
+// FUNCTION PLAYER /-\ srcs/player/rotate.c
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+
+// FUNCTION PLAYER /-\ srcs/player/keys.c
+int	key_release(int keycode, void *param);
+int	key_press(int keycode, void *param);
+
 // FUNCTION UTILS /-\ srcs/utils/function_utils.c
 int		ft_strlen_find(char *str, char c);
 int		ft_count_index(char **input);
+double	get_time(void);
 
 // FUNCTION UTILS MLX /-\ srcs/utils-mlx/function_mlx.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);

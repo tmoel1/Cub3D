@@ -6,18 +6,18 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 13:04:19 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:00:34 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+//new
 void	ft_hook(t_game *game)
 {
-	//mlx_mouse_hook(game->p_mlx_window, &ft_mouse_click, map); //Ecran de chargement
-	mlx_hook(game->p_mlx_window, 3, (1L << 1), &ft_destroy_escape, game);
+	mlx_hook(game->p_mlx_window, 2, (1L<<0), &key_press, game);
+	mlx_hook(game->p_mlx_window, 3, (1L<<1), &key_release, game);
 	mlx_hook(game->p_mlx_window, 17, 0, &ft_destroy_cross, game);
-	//mlx_hook(game->p_mlx_window, 12, (1L << 17), &ft_resize_window, game);
 }
 
 // directions[0][0] == NO
@@ -51,7 +51,7 @@ void	ft_init_main(t_game *game, char *argv)
 		game->map->map[i] = NULL;
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv) //too long
 {
 	t_game	game;
 	t_map	map;
@@ -63,6 +63,8 @@ int	main(int argc, char **argv)
 	game.map = &map;
 	if (ft_parse_base(&game, argc, argv) == 1)
 		exit(EXIT_FAILURE);
+	init_player(&game);
+	ft_init_raycast(&game);
 	game.p_mlx_init = mlx_init();
 	if (!game.p_mlx_init)
 		return (EXIT_FAILURE);
@@ -75,7 +77,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
 		&game.img.line_len, &game.img.endian);
-	//mlx_loop_hook(game.p_mlx_init, &ft_update_game, &map);
+	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	ft_hook(&game);
 	mlx_loop(game.p_mlx_init);
 	return (0);

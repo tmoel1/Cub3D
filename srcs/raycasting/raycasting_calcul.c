@@ -6,11 +6,11 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/02 14:10:00 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:12:20 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	process_dda(t_game *game)
 {
@@ -51,6 +51,15 @@ void	calculate_line_height(t_game *game)
 		game->ray->draw_end = WIN_HEIGHT - 1;
 }
 
+double	get_time(void)
+{
+	{
+		struct timeval	time;
+		gettimeofday(&time, NULL);
+		return (time.tv_sec * 1000.0 + time.tv_usec / 1000.0);
+	}
+}
+
 void	update_frame_time(t_game *game)
 {
 	game->ply->old_time = game->ply->time;
@@ -58,13 +67,4 @@ void	update_frame_time(t_game *game)
 	game->ply->frame_time = (game->ply->time - game->ply->old_time) / 1000.0;
 	game->ply->move_speed = game->ply->frame_time * 5.0; //chiffres  exactes a definir
 	game->ply->rotate_speed = game->ply->frame_time * 3.0; //pareil
-}
-
-static	get_time(void)
-{
-	{
-		struct timeval	time;
-		gettimeofday(&time, NULL);
-		return (time.tv_sec * 1000.0 + time.tv_usec / 1000.0);
-	}
 }

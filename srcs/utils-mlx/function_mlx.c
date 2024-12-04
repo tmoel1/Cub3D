@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   function_mlx.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:41:34 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/30 15:30:34 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:08:53 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {

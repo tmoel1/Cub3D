@@ -6,20 +6,18 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 13:09:34 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:58:58 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-// need to add prototypes
+#include "../../includes/cub3d.h"
 
 static void	choose_wall_texture(t_game *game)
 {
 	if (game->ray->side == 0)
 	{
 		if (game->ray->raydirx > 0)
-			game->ray->color = WEST_WALL_TEXTURE; // a definir dans .h (ray.color et #defines)
+			game->ray->color = WEST_WALL_TEXTURE;
 		else
 			game->ray->color = EAST_WALL_TEXTURE;
 	}
@@ -39,7 +37,7 @@ static void	draw_vertical_line(t_game *game)
 	y = 0;
 	while (y < game->ray->draw_start)
 	{
-		my_mlx_pixel_put(&game->img, game->ray->x, y, CEILING_COLOR); // a definir dans .h (game.img et #defines)
+		my_mlx_pixel_put(&game->img, game->ray->x, y, CEILING_COLOR);
 		y++;
 	}
 	// Draw wall

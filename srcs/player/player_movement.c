@@ -6,13 +6,13 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:18:33 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 12:10:58 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:58:12 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//from Andy 
+//from Andy
 
 void	move_forward(t_game *game)
 {
@@ -85,29 +85,3 @@ void	move_right(t_game *game)
 	if (game->map->map[y][x] != '1')
 		game->ply->pos_y += game->ply->dir_x * game->ply->move_speed;
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	t_game	game;
-
-	if (ft_parse_base(&game.map, argc, argv) == 1)
-		exit(EXIT_FAILURE);
-	game.p_mlx_init = mlx_init();
-	if (!game.p_mlx_init)
-		return (EXIT_FAILURE);
-	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WINDOW_WIDTH,
-			WINDOW_HEIGHT, WINDOW_TITLE);
-	if (!game.p_mlx_window)
-	{
-		return (EXIT_FAILURE);
-	}
-	init_player(&game);
-	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
-	mlx_hook(game.p_mlx_window, KEY_PRESS, 0, &key_press, &game);
-	mlx_hook(game.p_mlx_window, KEY_RELEASE, 0, &key_release, &game);
-	ft_hook(&game);
-	mlx_loop(game.p_mlx_init);
-	return (0);
-}
-*/

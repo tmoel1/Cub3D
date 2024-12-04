@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:07:41 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 12:08:25 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:57:55 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 //from Andy
 
-int	key_press(int keycode, void *param)
+//new
+int key_press(int keycode, void *param)
 {
-	t_game	*game;
+	t_game *game = (t_game *)param;
 
-	game = (t_game *)param;
 	if (keycode == KEY_ESC)
-		close_game(game);
+		ft_destroy_cross(game);
 	else if (keycode == KEY_W)
 		game->ply->w = true;
 	else if (keycode == KEY_S)
@@ -29,18 +29,18 @@ int	key_press(int keycode, void *param)
 		game->ply->a = true;
 	else if (keycode == KEY_D)
 		game->ply->d = true;
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_ARROW_LEFT)
 		game->ply->left = true;
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_ARROW_RIGHT)
 		game->ply->right = true;
 	return (0);
 }
 
-int	key_release(int keycode, void *param)
+//new
+int key_release(int keycode, void *param)
 {
-	t_game	*game;
+	t_game *game = (t_game *)param;
 
-	game = (t_game *)param;
 	if (keycode == KEY_W)
 		game->ply->w = false;
 	else if (keycode == KEY_S)
@@ -49,9 +49,9 @@ int	key_release(int keycode, void *param)
 		game->ply->a = false;
 	else if (keycode == KEY_D)
 		game->ply->d = false;
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_ARROW_LEFT)
 		game->ply->left = false;
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_ARROW_RIGHT)
 		game->ply->right = false;
 	return (0);
 }
