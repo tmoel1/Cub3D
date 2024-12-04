@@ -1,10 +1,10 @@
-	NO                          ./img/512debug/nord.xpm
+	NO                          ./img/512debug/coucou.xpm
              SO                                        ./img/512debug/sud.xpm
         WE                                  ./img/512debug/west.xpm
   EA           ./img/512debug/est.xpm
 
-F                              255,2000,0
-              C                                                    255,20,0
+F                              ./img/512debug/est.xpm
+              C                                                    255,25,50
 
     	1111111111111111111111111
         1000000000110000000000001  
