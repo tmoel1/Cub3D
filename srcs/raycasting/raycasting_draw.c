@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 15:58:58 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:52:18 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	cast_rays(t_game *game)
 		ft_init(game);
 		ft_dda_algo(game);
 		process_dda(game);
+		perp_init(game);
 		calculate_line_height(game);
 		choose_wall_texture(game);
 		draw_vertical_line(game);

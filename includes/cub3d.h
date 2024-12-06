@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 15:49:39 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:42:46 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ void	ft_init(t_game *game);
 void	ft_dda_algo(t_game *game);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_calcul.c
+void	perp_init(t_game *game);
 void	process_dda(t_game *game);
 void	calculate_line_height(t_game *game);
 void	update_frame_time(t_game *game);

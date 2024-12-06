@@ -27,7 +27,7 @@ SRC_2 = srcs/errors/errors.c \
 	srcs/utils/function_utils.c \
 	srcs/utils/parsing_utils.c \
 	srcs/utils-mlx/function_mlx.c
-#BONUS = srcs/parsing/parsing_map.c
+#BONUS = srcs/utils-mlx/function_mlx.c
 
 OBJ_1 = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRC_1))
 OBJ_2 = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRC_2))
@@ -43,7 +43,7 @@ INCLUDES = -I/usr/include -Imlx
 .c.o:
 	@$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJ_1) $(OBJ_2) $(BONUS_OBJ)
+$(NAME): $(MLX_LIB) $(OBJ_1) $(OBJ_2) $(BONUS_OBJ)
 	@echo "Compiling libft..."
 	@make -C $(LIBFTDIR)
 	@echo "Compiling $(NAME)..."

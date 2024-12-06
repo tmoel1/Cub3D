@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 15:12:20 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:49:07 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	perp_init(t_game *game)
+{
+	if (game->ray->side == 0)
+		game->ray->perpwalldist = (game->ray->sidedistx - \
+		game->ray->deltadistx);
+	else
+		game->ray->perpwalldist = (game->ray->sidedisty - \
+		game->ray->deltadisty);
+}
 
 void	process_dda(t_game *game)
 {
@@ -29,17 +39,10 @@ void	process_dda(t_game *game)
 			game->ray->side = 1;
 		}
 		if (game->map->map[game->ray->mapy][game->ray->mapx] == '1')
-		{
 			game->ray->hit = 1;
-			if (game->ray->side == 0)
-				game->ray->perpwalldist = (game->ray->sidedistx - \
-				game->ray->deltadistx);
-			else
-				game->ray->perpwalldist = (game->ray->sidedisty - \
-				game->ray->deltadisty);
-		}
 	}
 }
+
 void	calculate_line_height(t_game *game)
 {
 	game->ray->line_height = (int)(WIN_HEIGHT / game->ray->perpwalldist);
