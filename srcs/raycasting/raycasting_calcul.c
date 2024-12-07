@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/06 12:49:07 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/07 23:02:29 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,22 @@ void	process_dda(t_game *game)
 	{
 		if (game->ray->sidedistx < game->ray->sidedisty)
 		{
+			PL;
 			game->ray->sidedistx += game->ray->deltadistx;
 			game->ray->mapx += game->ray->stepx;
 			game->ray->side = 0;
 		}
 		else
 		{
+			PL;
 			game->ray->sidedisty += game->ray->deltadisty;
 			game->ray->mapy += game->ray->stepy;
 			game->ray->side = 1;
 		}
-		if (game->map->map[game->ray->mapy][game->ray->mapx] == '1')
+		if (game->map->map[game->ray->mapy][game->ray->mapx] != '0' && game->map->map[game->ray->mapy][game->ray->mapx] != 'N') // ICI UNE PARTIE DU BUG
+		{
 			game->ray->hit = 1;
+		}
 	}
 }
 

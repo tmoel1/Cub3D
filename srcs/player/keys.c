@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:07:41 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 15:57:55 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:09:02 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //from Andy
 
 //new
-int key_press(int keycode, void *param)
+int	key_press(int keycode, void *param)
 {
 	t_game *game = (t_game *)param;
 
@@ -37,7 +37,7 @@ int key_press(int keycode, void *param)
 }
 
 //new
-int key_release(int keycode, void *param)
+int	key_release(int keycode, void *param)
 {
 	t_game *game = (t_game *)param;
 
