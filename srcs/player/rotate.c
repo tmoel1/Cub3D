@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:06:59 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 14:02:00 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:11:12 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,36 @@ void	rotate_left(t_game *game)
 
 	game->ply->plane_y = old_plane_x * sin(-game->ply->rotate_speed)
 		+ game->ply->plane_y * cos(-game->ply->rotate_speed);
+}
+
+void	rotate_player(t_game *game, double angle)					// A AJOUTER
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = game->ply->dir_x;
+	game->ply->dir_x = game->ply->dir_x * cos(angle) - game->ply->dir_y * sin(angle);
+	game->ply->dir_y = old_dir_x * sin(angle) + game->ply->dir_y * cos(angle);
+
+	old_plane_x = game->ply->plane_x;
+	game->ply->plane_x = game->ply->plane_x * cos(angle) - game->ply->plane_y * sin(angle);
+	game->ply->plane_y = old_plane_x * sin(angle) + game->ply->plane_y * cos(angle);
+}
+
+int	mouse_move(int x, int y, void *param)					// A AJOUTER
+{
+	(void)y;
+	t_game	*game;
+	int		deltaX;
+	double	angle;
+
+	game = (t_game *)param;
+	deltaX = x - MID_X;
+	if (deltaX != 0)
+	{
+		angle = deltaX * game->ply->sensitivity;
+		rotate_player(game, angle);
+		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window, MID_X, MID_Y);
+	}
+	return (0);
 }

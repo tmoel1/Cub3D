@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:04:30 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/04 15:57:34 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:10:37 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	controls(t_game *game)
 //new
 int ft_update_game(void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game *game;
+	
+	game = (t_game *)param;
 	controls(game);
 	cast_rays(game);
 	return (0);
@@ -44,6 +46,7 @@ void init_player(t_game *game)
 {
 	game->ply->time = get_time();
 	game->ply->old_time = game->ply->time;
+	game->ply->sensitivity = 0.003;				// AJOUTEZ CETTE LIGNE
 	game->ply->frame_time = 0.0;
 	game->ply->move_speed = 0.1; // Set a default value
 	game->ply->rotate_speed = 0.05; // Set a default value

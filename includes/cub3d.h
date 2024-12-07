@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/06 12:42:46 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:10:09 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define WINDOW_TITLE "cub3d"
 # define WIN_WIDTH 2200
 # define WIN_HEIGHT 1080
+# define MID_X (WIN_WIDTH / 2)			// AJOUTEZ CETTE LIGNE APRES WIN_WIDTH
+# define MID_Y (WIN_HEIGHT / 2)			// AJOUTEZ CETTE LIGNE APRES WIN HEIGHT
 # define MAX_QUEUE_SIZE 1000
 # define NUM_XPM_FILES 49
 # define PLY_POV 60
@@ -111,6 +113,7 @@ typedef struct s_ply
 	double	rotate_speed;
 	double	time;
 	double	old_time;
+	double	sensitivity;			// AJOUTEZ CETTE LIGNE
 
 	bool	w;
 	bool	a;
@@ -231,6 +234,8 @@ void	move_right(t_game *game);
 // FUNCTION PLAYER /-\ srcs/player/rotate.c
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
+void	rotate_player(t_game *game, double angle);				// A AJOUTER
+int		mouse_move(int x, int y, void *param);					// A AJOUTER
 
 // FUNCTION PLAYER /-\ srcs/player/keys.c
 int	key_release(int keycode, void *param);

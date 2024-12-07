@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 16:00:34 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:13:31 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int argc, char **argv) //too long
 		return (EXIT_FAILURE);
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
 		&game.img.line_len, &game.img.endian);
+	mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);			// A AJOUTER
+	mlx_hook(game.p_mlx_window, 6, (1L<<6), mouse_move, &game);					// A AJOUTER
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	ft_hook(&game);
 	mlx_loop(game.p_mlx_init);
