@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:44:51 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/07 15:49:43 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:52:44 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void init_deltadist(t_game *game)
 // distance being one x or y side to the next within the grid map
 // (all as seen from above)
 // 1e30 is just a generic "very large number" to prevent division by 0
+// fabs() computes the absolute value of a float aka ensures it's positive
 
 static void set_step(t_game *game)
 {
@@ -99,14 +100,19 @@ void	ft_init(t_game *game)
 
 // for intial params of each vertical ray
 // camera x coords are -1 to +1, determines ray position on camera plane
-// ray direction vectors combine player's pos and camera plane vector
-// casting player grid position to int is for DDA algo
+// ray direction vectors combine player's position and camera plane vector
+// casting player grid position to (int) is for DDA algo
 
 void	ft_dda_algo(t_game *game)
 {
 	init_deltadist(game);
 	set_step(game);
 }
+
+// "Digital Differential Analysis"
 // algo styled from <lodev.org> raycasting tutorial
-// calculates incremental distances for stepping through the 2D grid map
-// then figures out the steps to do so
+// it's basically magic
+// or just a series of math functions if you remember highschool trigonometry
+// so, magic.
+// calculates angles/paths and incremental distances for stepping through 
+// the 2D grid map (the "3D" map as seen from above)
