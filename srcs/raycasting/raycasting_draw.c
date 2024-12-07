@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/07 21:48:15 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/07 23:06:51 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static void	choose_wall_texture(t_game *game)
 	}
 }
 
+// assigns textures based on wall heading as per the subject
+// side 0 is a vertical wall (y axis), side 1 horizontal (x axis)
+// after, chooses W/E or N/S depending on ray direction
+
 static void	draw_vertical_line(t_game *game)
 {
 	int	y;
@@ -40,19 +44,21 @@ static void	draw_vertical_line(t_game *game)
 		my_mlx_pixel_put(&game->img, game->ray->x, y, CEILING_COLOR);
 		y++;
 	}
-	// Draw wall
 	while (y <= game->ray->draw_end)
 	{
 		my_mlx_pixel_put(&game->img, game->ray->x, y, game->ray->color);
 		y++;
 	}
-	// Draw floor
 	while (y < WIN_HEIGHT)
 	{
 		my_mlx_pixel_put(&game->img, game->ray->x, y, FLOOR_COLOR);
 		y++;
 	}
 }
+
+// draws ceiling, wall and floor in that order of the while loops
+// fills all 3 sections of possible texture types of a vertical slice
+// my_mlx_pixel_put sets colors of pixels directly in img buffer
 
 void	cast_rays(t_game *game)
 {
@@ -71,3 +77,7 @@ void	cast_rays(t_game *game)
 	}
 	mlx_put_image_to_window(game->p_mlx_init, game->p_mlx_window, game->img.i, 0, 0);
 }
+// the "main" of raycasting engine
+// loops across horizontally and applies all the raycasting functions to
+// each x axis point and increments
+// outputs final image after completing the pass
