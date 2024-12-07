@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:44:51 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/06 12:51:55 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:49:43 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//new
 void ft_init_raycast(t_game *game)
 {
 	double rad_angle = game->ply->dir_angle * (M_PI / 180.0);
@@ -38,7 +37,10 @@ void ft_init_raycast(t_game *game)
 	game->ray->color = 0;
 }
 
-//new
+// rad_angle is converted from degrees to radians using Pi / 180
+// direction vectors and camera plane uses trig functions cos & sin
+// 0.66 is a standard viewing angle
+
 static void init_deltadist(t_game *game)
 {
 	if (game->ray->raydirx == 0)
@@ -51,7 +53,11 @@ static void init_deltadist(t_game *game)
 		game->ray->deltadisty = fabs(1 / game->ray->raydiry);
 }
 
-//new
+// to calculate distance ray must travel (deltadist), necessary for DDA algo
+// distance being one x or y side to the next within the grid map
+// (all as seen from above)
+// 1e30 is just a generic "very large number" to prevent division by 0
+
 static void set_step(t_game *game)
 {
 	if (game->ray->raydirx < 0)
@@ -76,7 +82,11 @@ static void set_step(t_game *game)
 	}
 }
 
-//new
+// sets "step" distance which is the initial distance the rays will travel
+// to reach the first vertical or horizontal gridline (from above)
+// used later for calculating wall intersections
+// -1 and +1 here represent for x & y left/right and up/down respectively
+
 void	ft_init(t_game *game)
 {
 	game->ray->camerax = 2 * game->ray->x / (double)WIN_WIDTH - 1;
@@ -87,9 +97,16 @@ void	ft_init(t_game *game)
 	game->ray->hit = 0;
 }
 
-//new
+// for intial params of each vertical ray
+// camera x coords are -1 to +1, determines ray position on camera plane
+// ray direction vectors combine player's pos and camera plane vector
+// casting player grid position to int is for DDA algo
+
 void	ft_dda_algo(t_game *game)
 {
 	init_deltadist(game);
 	set_step(game);
 }
+// algo styled from <lodev.org> raycasting tutorial
+// calculates incremental distances for stepping through the 2D grid map
+// then figures out the steps to do so

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/06 12:49:07 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:23:06 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	perp_init(t_game *game)
 		game->ray->perpwalldist = (game->ray->sidedisty - \
 		game->ray->deltadisty);
 }
+
+// corrects for fisheye distortion by calculating true perpendicular distance
 
 void	process_dda(t_game *game)
 {
@@ -43,6 +45,11 @@ void	process_dda(t_game *game)
 	}
 }
 
+// traverses 2D grid map until a wall is hit
+// constantly compares sidedistx and sidedisty to choose to step in x or y
+// for ray->side 0 flags a vertical wall, 1 flags horizontal
+// for ray->hit 1 flags a hit
+
 void	calculate_line_height(t_game *game)
 {
 	game->ray->line_height = (int)(WIN_HEIGHT / game->ray->perpwalldist);
@@ -53,6 +60,10 @@ void	calculate_line_height(t_game *game)
 	if (game->ray->draw_end >= WIN_HEIGHT)
 		game->ray->draw_end = WIN_HEIGHT - 1;
 }
+
+// for determining the height of the vertical slice of wall to be drawn
+// basically what makes walls "further away" drawn smaller and vice versa
+// if statements act as out-of-bounds checks
 
 double	get_time(void)
 {
