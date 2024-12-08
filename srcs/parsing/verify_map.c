@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:50 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/03 10:15:28 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:22:22 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_init_coords(t_map *map, t_game *game, int k, int i)
 	if (map->map[k][i] == 'N' || map->map[k][i] == 'S'
 		|| map->map[k][i] == 'E' || map->map[k][i] == 'W')
 	{
-		game->ply->pos_x = (float)i;
-		game->ply->pos_y = (float)k + 1;
+		game->ply->pos_x = (float)i + 0.5;
+		game->ply->pos_y = (float)k + 0.5;
 		if (map->map[k][i] == 'N')
 		{
 			game->ply->dir_angle = 270.0;

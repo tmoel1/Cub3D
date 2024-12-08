@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:44:51 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/07 23:06:02 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:03:56 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void ft_init_raycast(t_game *game)
 // direction vectors and camera plane uses trig functions cos & sin
 // 0.66 is a standard viewing angle
 
-static void init_deltadist(t_game *game)
+void	init_deltadist(t_game *game)
 {
 	if (game->ray->raydirx == 0)
 		game->ray->deltadistx = 1e30;
@@ -59,7 +59,7 @@ static void init_deltadist(t_game *game)
 // 1e30 is just a generic "very large number" to prevent division by 0
 // fabs() computes the absolute value of a float aka ensures it's positive
 
-static void set_step(t_game *game)
+void	set_step(t_game *game)
 {
 	if (game->ray->raydirx < 0)
 	{
@@ -87,7 +87,6 @@ static void set_step(t_game *game)
 // to reach the first vertical or horizontal gridline (from above)
 // used later for calculating wall intersections
 // -1 and +1 here represent for x & y left/right and up/down respectively
-
 void	ft_init(t_game *game)
 {
 	game->ray->camerax = 2 * game->ray->x / (double)WIN_WIDTH - 1;

@@ -6,20 +6,21 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/07 23:06:32 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:50:18 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <ctype.h>
 
 void	perp_init(t_game *game)
 {
 	if (game->ray->side == 0)
-		game->ray->perpwalldist = (game->ray->sidedistx - \
-		game->ray->deltadistx);
+		game->ray->perpwalldist = (game->ray->sidedistx
+			- game->ray->deltadistx);
 	else
-		game->ray->perpwalldist = (game->ray->sidedisty - \
-		game->ray->deltadisty);
+		game->ray->perpwalldist = (game->ray->sidedisty
+			- game->ray->deltadisty);
 }
 
 // corrects for fisheye distortion by calculating true perpendicular distance
@@ -30,19 +31,18 @@ void	process_dda(t_game *game)
 	{
 		if (game->ray->sidedistx < game->ray->sidedisty)
 		{
-			PL;
 			game->ray->sidedistx += game->ray->deltadistx;
 			game->ray->mapx += game->ray->stepx;
 			game->ray->side = 0;
 		}
 		else
 		{
-			PL;
 			game->ray->sidedisty += game->ray->deltadisty;
 			game->ray->mapy += game->ray->stepy;
 			game->ray->side = 1;
 		}
-		if (game->map->map[game->ray->mapy][game->ray->mapx] != '0' && game->map->map[game->ray->mapy][game->ray->mapx] != 'N') // ICI UNE PARTIE DU BUG
+		printf("caract: %d | mapy: %d | mapx: %d\n", game->map->map[game->ray->mapy][game->ray->mapx], game->ray->mapy, game->ray->mapx);
+		if (game->map->map[game->ray->mapy][game->ray->mapx] != '0' && game->map->map[game->ray->mapy][game->ray->mapx] != 'N')
 		{
 			game->ray->hit = 1;
 		}
