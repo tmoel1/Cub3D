@@ -1,7 +1,7 @@
 #include "../../includes/cub3d.h"
 
 #define COLLISION_BUFFER 0.2
-
+/*
 void	move_forward(t_game *game)
 {
 	int	y;
@@ -19,7 +19,43 @@ void	move_forward(t_game *game)
 	if (game->map->map[y][x] != '1')
 		game->ply->pos_y += game->ply->dir_y * game->ply->move_speed;
 }
+*/
 
+void	move_forward(t_game *game)
+{
+	// Next intended positions with collision buffer
+	double next_x = game->ply->pos_x + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+	double next_y = game->ply->pos_y + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+
+	int map_height = ft_count_index(game->map->map);
+
+	// Check horizontal (X) movement:
+	int check_x = (int)floor(next_x);
+	int check_y = (int)floor(game->ply->pos_y); // current y line
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+		{
+			// Safe to move in x-direction
+			game->ply->pos_x += game->ply->dir_x * game->ply->move_speed;
+		}
+	}
+
+	// Check vertical (Y) movement:
+	check_x = (int)floor(game->ply->pos_x); // potentially updated x
+	check_y = (int)floor(next_y);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+		{
+			// Safe to move in y-direction
+			game->ply->pos_y += game->ply->dir_y * game->ply->move_speed;
+		}
+	}
+}
+/*
 void	move_backwards(t_game *game)
 {
 	int	y;
@@ -72,4 +108,93 @@ void	move_right(t_game *game)
 
 	if (game->map->map[y][x] != '1')
 		game->ply->pos_y += game->ply->dir_x * game->ply->move_speed;
+}
+*/
+
+void	move_backwards(t_game *game)
+{
+	double next_x = game->ply->pos_x - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+	double next_y = game->ply->pos_y - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+
+	int map_height = ft_count_index(game->map->map);
+
+	// Check horizontal (X) movement
+	int check_y = (int)floor(game->ply->pos_y);
+	int check_x = (int)floor(next_x);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_x -= game->ply->dir_x * game->ply->move_speed;
+	}
+
+	// Check vertical (Y) movement
+	check_x = (int)floor(game->ply->pos_x);
+	check_y = (int)floor(next_y);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_y -= game->ply->dir_y * game->ply->move_speed;
+	}
+}
+
+void	move_left(t_game *game)
+{
+	// For moving left: we move perpendicular to dir_x/dir_y
+	// left direction: +dir_y on X axis, -dir_x on Y axis
+	double next_x = game->ply->pos_x + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	double next_y = game->ply->pos_y - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+
+	int map_height = ft_count_index(game->map->map);
+
+	// Check horizontal (X) movement
+	int check_y = (int)floor(game->ply->pos_y);
+	int check_x = (int)floor(next_x);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_x += game->ply->dir_y * game->ply->move_speed;
+	}
+
+	// Check vertical (Y) movement
+	check_x = (int)floor(game->ply->pos_x);
+	check_y = (int)floor(next_y);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_y -= game->ply->dir_x * game->ply->move_speed;
+	}
+}
+
+void	move_right(t_game *game)
+{
+	// For moving right: we move perpendicular in the opposite direction to left
+	// right direction: -dir_y on X axis, +dir_x on Y axis
+	double next_x = game->ply->pos_x - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	double next_y = game->ply->pos_y + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+
+	int map_height = ft_count_index(game->map->map);
+
+	// Check horizontal (X) movement
+	int check_y = (int)floor(game->ply->pos_y);
+	int check_x = (int)floor(next_x);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_x -= game->ply->dir_y * game->ply->move_speed;
+	}
+
+	// Check vertical (Y) movement
+	check_x = (int)floor(game->ply->pos_x);
+	check_y = (int)floor(next_y);
+	if (check_y >= 0 && check_y < map_height && game->map->map[check_y] != NULL)
+	{
+		int row_length = (int)ft_strlen(game->map->map[check_y]);
+		if (check_x >= 0 && check_x < row_length && game->map->map[check_y][check_x] != '1')
+			game->ply->pos_y += game->ply->dir_x * game->ply->move_speed;
+	}
 }
