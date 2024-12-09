@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/09 14:12:49 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:40:21 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,56 +52,57 @@ void	process_dda(t_game *game)
 
 void	process_dda(t_game *game)
 {
-    int map_height = ft_count_index(game->map->map);
+	int map_height = ft_count_index(game->map->map);
 
-    while (game->ray->hit == 0)
-    {
-        if (game->ray->sidedistx < game->ray->sidedisty)
-        {
-            game->ray->sidedistx += game->ray->deltadistx;
-            game->ray->mapx += game->ray->stepx;
-            game->ray->side = 0;
-        }
-        else
-        {
-            game->ray->sidedisty += game->ray->deltadisty;
-            game->ray->mapy += game->ray->stepy;
-            game->ray->side = 1;
-        }
+	while (game->ray->hit == 0)
+	{
+		if (game->ray->sidedistx < game->ray->sidedisty)
+		{
+			game->ray->sidedistx += game->ray->deltadistx;
+			game->ray->mapx += game->ray->stepx;
+			game->ray->side = 0;
+		}
+		else
+		{
+			game->ray->sidedisty += game->ray->deltadisty;
+			game->ray->mapy += game->ray->stepy;
+			game->ray->side = 1;
+		}
 
-        // BOUNDARY CHECKS:
-        if (game->ray->mapy < 0 || game->ray->mapy >= map_height)
-        {
-            // Out of vertical bounds -> treat as wall hit
-            game->ray->hit = 1;
-            break;
-        }
+		// BOUNDARY CHECKS:
+		if (game->ray->mapy < 0 || game->ray->mapy >= map_height)
+		{
+			// Out of vertical bounds -> treat as wall hit
+			game->ray->hit = 1;
+			break;
+		}
 
-        if (game->map->map[game->ray->mapy] == NULL)
-        {
-            // Invalid row, treat as wall
-            game->ray->hit = 1;
-            break;
-        }
+		if (game->map->map[game->ray->mapy] == NULL)
+		{
+			// Invalid row, treat as wall
+			game->ray->hit = 1;
+			break;
+		}
 
-        int row_length = (int)ft_strlen(game->map->map[game->ray->mapy]);
-        if (game->ray->mapx < 0 || game->ray->mapx >= row_length)
-        {
-            // Out of horizontal bounds -> treat as wall hit
-            game->ray->hit = 1;
-            break;
-        }
+		int row_length = (int)ft_strlen(game->map->map[game->ray->mapy]);
+		if (game->ray->mapx < 0 || game->ray->mapx >= row_length)
+		{
+			// Out of horizontal bounds -> treat as wall hit
+			game->ray->hit = 1;
+			break;
+		}
 
-        // Now safe to access:
-        char tile = game->map->map[game->ray->mapy][game->ray->mapx];
-        printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx);
+		// Now safe to access:
+		char tile = game->map->map[game->ray->mapy][game->ray->mapx];
+		printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx);
 
-        // Checking for walls:
-        if (tile != '0' && tile != 'N')
-        {
-            game->ray->hit = 1;
-        }
-    }
+		// Checking for walls:
+		//if (tile != '0' && tile != 'N' && tile != 'E' && tile != 'W')
+		if (tile == '1')
+		{
+			game->ray->hit = 1;
+		}
+	}
 }
 
 

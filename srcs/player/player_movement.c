@@ -113,9 +113,11 @@ void	move_right(t_game *game)
 
 void	move_backwards(t_game *game)
 {
-	double next_x = game->ply->pos_x - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
-	double next_y = game->ply->pos_y - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
-
+	double next_x;
+	double next_y;
+	// !!!!!!!!!! in fact these variables should proabbly go in a struct somewhere to avoid declaring??
+	next_x = game->ply->pos_x - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+	next_y = game->ply->pos_y - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
 	int map_height = ft_count_index(game->map->map);
 
 	// Check horizontal (X) movement
@@ -143,9 +145,11 @@ void	move_left(t_game *game)
 {
 	// For moving left: we move perpendicular to dir_x/dir_y
 	// left direction: +dir_y on X axis, -dir_x on Y axis
-	double next_x = game->ply->pos_x + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
-	double next_y = game->ply->pos_y - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
-
+	double next_x;
+	double next_y;
+	// !!!!!!! same as above maybe
+	next_x = game->ply->pos_x + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	next_y = game->ply->pos_y - game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
 	int map_height = ft_count_index(game->map->map);
 
 	// Check horizontal (X) movement
@@ -173,9 +177,11 @@ void	move_right(t_game *game)
 {
 	// For moving right: we move perpendicular in the opposite direction to left
 	// right direction: -dir_y on X axis, +dir_x on Y axis
-	double next_x = game->ply->pos_x - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
-	double next_y = game->ply->pos_y + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
-
+	double next_x;
+	double next_y;
+	// !!!! same
+	next_x = game->ply->pos_x - game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	next_y = game->ply->pos_y + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
 	int map_height = ft_count_index(game->map->map);
 
 	// Check horizontal (X) movement
