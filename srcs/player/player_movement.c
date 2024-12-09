@@ -24,10 +24,14 @@ void	move_forward(t_game *game)
 void	move_forward(t_game *game)
 {
 	// Next intended positions with collision buffer
-	double next_x = game->ply->pos_x + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
-	double next_y = game->ply->pos_y + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	double next_x;
+	double next_y;
+	int map_height;
 
-	int map_height = ft_count_index(game->map->map);
+
+	next_x = game->ply->pos_x + game->ply->dir_x * (game->ply->move_speed + COLLISION_BUFFER);
+	next_y = game->ply->pos_y + game->ply->dir_y * (game->ply->move_speed + COLLISION_BUFFER);
+	map_height = ft_count_index(game->map->map);
 
 	// Check horizontal (X) movement:
 	int check_x = (int)floor(next_x);
@@ -55,6 +59,8 @@ void	move_forward(t_game *game)
 		}
 	}
 }
+
+
 /*
 void	move_backwards(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/09 14:40:21 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:51:52 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,94 +22,80 @@ void	perp_init(t_game *game)
 		game->ray->perpwalldist = (game->ray->sidedisty
 			- game->ray->deltadisty);
 }
-/*
+
 // corrects for fisheye distortion by calculating true perpendicular distance
 
-void	process_dda(t_game *game)
+static int check_collision(t_game *game, int map_height)
 {
-	while (game->ray->hit == 0)
+	int		row_length;
+	char	tile;
+
+	if (game->ray->mapy < 0 || game->ray->mapy >= map_height)
 	{
-		if (game->ray->sidedistx < game->ray->sidedisty)
-		{
-			game->ray->sidedistx += game->ray->deltadistx;
-			game->ray->mapx += game->ray->stepx;
-			game->ray->side = 0;
-		}
-		else
-		{
-			game->ray->sidedisty += game->ray->deltadisty;
-			game->ray->mapy += game->ray->stepy;
-			game->ray->side = 1;
-		}
-		printf("caract: %d | mapy: %d | mapx: %d\n", game->map->map[game->ray->mapy][game->ray->mapx], game->ray->mapy, game->ray->mapx);
-		if (game->map->map[game->ray->mapy][game->ray->mapx] != '0' && game->map->map[game->ray->mapy][game->ray->mapx] != 'N')
-		{
-			game->ray->hit = 1;
-		}
+		game->ray->hit = 1;
+		return 1;
 	}
-}
-*/
-
-void	process_dda(t_game *game)
-{
-	int map_height = ft_count_index(game->map->map);
-
-	while (game->ray->hit == 0)
+	if (game->map->map[game->ray->mapy] == NULL)
 	{
-		if (game->ray->sidedistx < game->ray->sidedisty)
-		{
-			game->ray->sidedistx += game->ray->deltadistx;
-			game->ray->mapx += game->ray->stepx;
-			game->ray->side = 0;
-		}
-		else
-		{
-			game->ray->sidedisty += game->ray->deltadisty;
-			game->ray->mapy += game->ray->stepy;
-			game->ray->side = 1;
-		}
+		game->ray->hit = 1;
+		return 1;
+	}
+	row_length = (int)ft_strlen(game->map->map[game->ray->mapy]);
+	if (game->ray->mapx < 0 || game->ray->mapx >= row_length)
+	{
+		game->ray->hit = 1;
+		return 1;
+	}
+	tile = game->map->map[game->ray->mapy][game->ray->mapx];
+	//printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx); // Debug print
+	// if (tile != '0' && tile != 'N' && tile != 'E' && tile != 'W')
+	if (tile == '1')
+		game->ray->hit = 1;
+	return game->ray->hit;
+}
 
-		// BOUNDARY CHECKS:
-		if (game->ray->mapy < 0 || game->ray->mapy >= map_height)
-		{
-			// Out of vertical bounds -> treat as wall hit
-			game->ray->hit = 1;
-			break;
-		}
+// checks if y is out of map bounds, if so marks as hit/collision
+// checks if the map row even exists as sometime it doesn't, if it does -> hit
+// same out-of-bounds check for the x axis, if so the it's a hit
+// tile takes the location of position the ray is touching
+// if it's a wall then hit of course, then return hit to finish
 
-		if (game->map->map[game->ray->mapy] == NULL)
-		{
-			// Invalid row, treat as wall
-			game->ray->hit = 1;
-			break;
-		}
-
-		int row_length = (int)ft_strlen(game->map->map[game->ray->mapy]);
-		if (game->ray->mapx < 0 || game->ray->mapx >= row_length)
-		{
-			// Out of horizontal bounds -> treat as wall hit
-			game->ray->hit = 1;
-			break;
-		}
-
-		// Now safe to access:
-		char tile = game->map->map[game->ray->mapy][game->ray->mapx];
-		printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx);
-
-		// Checking for walls:
-		//if (tile != '0' && tile != 'N' && tile != 'E' && tile != 'W')
-		if (tile == '1')
-		{
-			game->ray->hit = 1;
-		}
+static void step_ray(t_game *game)
+{
+	if (game->ray->sidedistx < game->ray->sidedisty)
+	{
+		game->ray->sidedistx += game->ray->deltadistx;
+		game->ray->mapx += game->ray->stepx;
+		game->ray->side = 0;
+	}
+	else
+	{
+		game->ray->sidedisty += game->ray->deltadisty;
+		game->ray->mapy += game->ray->stepy;
+		game->ray->side = 1;
 	}
 }
 
+// chooses to step left or right
+// increments axis distance, moves to next square
+// sets variable to 0 or 1 depending on if it hit a vertical or horizonal wall
 
-// traverses 2D grid map until a wall is hit
-// constantly compares sidedistx and sidedisty to choose to step in x or y
-// for ray->side 0 flags a vertical wall, 1 flags horizontal
-// for ray->hit 1 flags a hit
+void process_dda(t_game *game)
+{
+	int map_height;
+
+	map_height = ft_count_index(game->map->map);
+	while (game->ray->hit == 0)
+	{
+		step_ray(game);
+		if (check_collision(game, map_height))
+			break;
+	}
+}
+
+// traverses 2D grid map (step_ray) constantly checking until a wall is hit 
+// checks also constantly for collisions due to rays touching things they shouldn't
+// breaks out if so or if hit == 1
 
 void	calculate_line_height(t_game *game)
 {
@@ -140,6 +126,7 @@ void	update_frame_time(t_game *game)
 	game->ply->old_time = game->ply->time;
 	game->ply->time = get_time();
 	game->ply->frame_time = (game->ply->time - game->ply->old_time) / 1000.0;
-	game->ply->move_speed = game->ply->frame_time * 5.0; //chiffres  exactes a definir
-	game->ply->rotate_speed = game->ply->frame_time * 3.0; //pareil
+	game->ply->move_speed = game->ply->frame_time * 5.0;
+	game->ply->rotate_speed = game->ply->frame_time * 3.0;
 }
+//!!!!!! might look at adjusting/optimising move_speed and rotate_speed ??
