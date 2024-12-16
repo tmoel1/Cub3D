@@ -15,6 +15,7 @@ SRC_2 = srcs/errors/errors.c \
 	srcs/game/settings.c \
 	srcs/parsing/parsing.c \
 	srcs/parsing/parsing_map.c \
+	srcs/parsing/parsing_rgb.c \
 	srcs/parsing/verify_direction.c \
 	srcs/parsing/verify_map.c \
 	srcs/raycasting/raycasting_calcul.c \

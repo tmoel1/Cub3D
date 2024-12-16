@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:00:19 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/03 10:36:16 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:43:29 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_condition_bis(t_map *map, int k, int i, int count)
 	{
 		ft_error("Invalid map", count);
 	}
+	else if (map->map[k][i] == '0'
+		&& ((ft_strlen(map->map[k - 1]) - 2 < i)
+		|| (ft_strlen(map->map[k]) - 2 == i)))
+		ft_error("Invalid map", count);
 }
 
 int	ft_condition_route(t_map *map, int k, int i, int count)

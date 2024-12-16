@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/04 13:16:21 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:22:41 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,4 @@ int	ft_parse_base(t_game *game, int argc, char **argv)
 	ft_init_main(game, argv[1]);
 	ft_init_parsing(game, argv[1]);
 	return (0);
-}
-
-void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate)
-{
-	if (map->line[i] > '2' && *c_rgb == 1
-		&& ft_isdigit(map->line[i + 1]) && ft_isdigit(map->line[i + 2]))
-		ft_error_dir(map, 'I', i);
-	else if ((map->line[i] > '5' && *c_rgb == 2 && ft_isdigit(map->line[i + 1]))
-		|| (map->line[i] > '5' && *c_rgb == 3))
-		ft_error_dir(map, 'I', i);
-	if (map->line[i] == ',' && (*c_rgb >= 1 && *c_rgb <= 3))
-	{
-		*c_rgb = 0;
-		*c_separate += 1;
-	}
-	else if ((map->line[i] == ',' && *c_rgb > 3) || *c_separate > 2
-		|| (map->line[i] == ',' && *c_separate > 2
-			&& !ft_isdigit(map->line[i])))
-		ft_error_rgb();
 }

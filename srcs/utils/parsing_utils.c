@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:00:26 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/25 15:07:27 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:07:39 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ bool	ft_only_iswall(const char *line)
 	return (false);
 }
 
-void	ft_check_espace(t_map *map, int i)
+void	ft_check_espace(t_map *map, int i, bool norgb)
 {
 	int	c_rgb;
 	int	c_separate;
@@ -84,7 +84,7 @@ void	ft_check_espace(t_map *map, int i)
 	c_separate = 0;
 	while (map->line[i] != '\0')
 	{
-		if (map->line[i] == '.' && map->line[i + 1] == '/')
+		if (map->line[i] == '.' && map->line[i + 1] == '/' && norgb)
 			return ;
 		if (ft_isdigit(map->line[i]) || (map->line[i] == ','
 				&& ft_isdigit(map->line[i - 1])))
@@ -98,8 +98,6 @@ void	ft_check_espace(t_map *map, int i)
 			ft_error_dir(map, 'I', i);
 		i++;
 	}
-	if (c_separate != 2)
-		ft_error_rgb();
 }
 
 int	ft_check_dir(t_map *map)
@@ -111,20 +109,20 @@ int	ft_check_dir(t_map *map)
 	{
 		if (map->line[i] == 'N' && map->line[i + 1] == 'O'
 			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i), 0);
+			return (ft_check_espace(map, i, true), 0);
 		else if (map->line[i] == 'S' && map->line[i + 1] == 'O'
 			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i), 1);
+			return (ft_check_espace(map, i, true), 1);
 		else if (map->line[i] == 'W' && map->line[i + 1] == 'E'
 			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i), 2);
+			return (ft_check_espace(map, i, true), 2);
 		else if (map->line[i] == 'E' && map->line[i + 1] == 'A'
 			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i), 3);
+			return (ft_check_espace(map, i, true), 3);
 		else if (map->line[i] == 'F' && map->line[i + 1] == ' ')
-			return (ft_check_espace(map, i), 4);
+			return (ft_check_espace(map, i, false), 4);
 		else if (map->line[i] == 'C' && map->line[i + 1] == ' ')
-			return (ft_check_espace(map, i), 5);
+			return (ft_check_espace(map, i, false), 5);
 	}
 	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/09 14:12:49 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:38:12 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	process_dda(t_game *game)
 
         // Now safe to access:
         char tile = game->map->map[game->ray->mapy][game->ray->mapx];
-        printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx);
+        //printf("caract: %d | mapy: %d | mapx: %d\n", tile, game->ray->mapy, game->ray->mapx);
 
         // Checking for walls:
         if (tile != '0' && tile != 'N')

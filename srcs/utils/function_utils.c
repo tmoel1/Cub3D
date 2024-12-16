@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 14:25:12 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/25 11:35:47 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:52:55 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	ft_strlen_find(char *str, char c)
 	{
 		if (c == 'N')
 		{
-			if (i + 1 < ft_strlen(str) && str[i] == '.'
-				&& str[i + 1] == '/')
-				return (i);
-			else if (ft_isdigit(str[i]))
+			if (ft_isdigit(str[i]))
 				return (i);
 		}
 		else if (i + 1 < ft_strlen(str) && str[i] == c
