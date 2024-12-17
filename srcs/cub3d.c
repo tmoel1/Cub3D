@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/07 12:13:31 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:59:06 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,21 @@ void	ft_init_main(t_game *game, char *argv)
 	i = -1;
 	game->map->map = malloc(sizeof(char *) * ft_malloc_size(argv) + 1);
 	game->map->line = NULL;
-	game->map->directions = malloc(sizeof(char *) * 6);
+	game->map->dir = malloc(sizeof(char *) * 6);
+	game->map->floor_color = 0;
+	game->map->ceiling_color = 0;
 	game->ply->pos_x = 0.0;
 	game->ply->pos_y = 0.0;
 	game->ply->dir_angle = 0.0;
 	game->ply->angle = 0.0;
 	game->ply->pov_rad = 0.0;
-	if (!game->map->directions)
+	if (!game->map->dir)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	while (++i < 6)
-		game->map->directions[i] = NULL;
+		game->map->dir[i] = NULL;
 	i = -1;
 	while (++i < ft_malloc_size(argv))
 		game->map->map[i] = NULL;

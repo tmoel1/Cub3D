@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/15 22:22:41 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:19:31 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_init_map(t_map *map, bool out_direction, int *i)
 {
-	if (out_direction && map->directions[0] != NULL
-		&& map->directions[1] != NULL && map->directions[2] != NULL
-		&& map->directions[3] != NULL && map->directions[4] != NULL
-		&& map->directions[5] != NULL)
+	if (out_direction && map->dir[0] != NULL
+		&& map->dir[1] != NULL && map->dir[2] != NULL
+		&& map->dir[3] != NULL && map->dir[4] != NULL
+		&& map->dir[5] != NULL)
 	{
 		map->map[++(*i)] = ft_substr(map->line, 0, ft_strlen(map->line));
 		printf("%d\n", ft_strlen(map->map[*i]));
@@ -49,6 +49,7 @@ void	ft_init_parsing(t_game *game, char *argv)
 	}
 	close(fd);
 	ft_error_dir(game->map, 'D', 0);
+	//exit(EXIT_SUCCESS);
 	if (!out_direction)
 		(printf("Error: No map\n"), exit(EXIT_FAILURE));
 	ft_map_route(game, count[6]);

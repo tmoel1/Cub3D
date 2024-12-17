@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:00:26 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/15 20:07:39 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:57:50 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,18 @@ bool	ft_only_iswall(const char *line)
 
 void	ft_check_espace(t_map *map, int i, bool norgb)
 {
-	int	c_rgb;
-	int	c_separate;
-
 	i += 2;
-	c_rgb = 0;
-	c_separate = 0;
 	while (map->line[i] != '\0')
 	{
 		if (map->line[i] == '.' && map->line[i + 1] == '/' && norgb)
 			return ;
-		if (ft_isdigit(map->line[i]) || (map->line[i] == ','
-				&& ft_isdigit(map->line[i - 1])))
+		if ((ft_isdigit(map->line[i]) && !norgb) || (map->line[i] == ','
+				&& ft_isdigit(map->line[i - 1]) && !norgb))
 		{
-			if (ft_isdigit(map->line[i]))
+			return ;
+			/*if (ft_isdigit(map->line[i]))
 				c_rgb += 1;
-			ft_check_rgb_color(map, i, &c_rgb, &c_separate);
+			ft_check_rgb_color(map, i, &c_rgb, &c_separate);*/
 		}
 		else if (!(map->line[i] == ' ' || map->line[i] == '\t'
 				|| map->line[i] == '\n'))

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/08 14:31:44 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:58:45 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,11 @@ typedef struct s_ray
 typedef struct s_map
 {
 	char	**map;
-	char	**directions;
+	char	**dir;
+	char	*tmp;
 	char	*line;
+	int		floor_color;
+	int		ceiling_color;
 }	t_map;
 
 typedef struct s_img
@@ -196,7 +199,9 @@ int		ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
 int		ft_parse_base(t_game *game, int argc, char **argv);
-void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
+//void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
+int		ft_rgb_to_hex(int red, int green, int blue);
+void	ft_find_rgb(t_map *map, int index, int i, int count_rgb);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
 void	ft_map_route(t_game *game, int count);

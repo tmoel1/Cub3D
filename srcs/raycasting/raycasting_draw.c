@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/15 22:19:41 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:19:02 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	draw_vertical_line(t_game *game)
 	y = 0;
 	while (y < game->ray->draw_start)
 	{
-		my_mlx_pixel_put(&game->img, game->ray->x, y, CEILING_COLOR);
+		my_mlx_pixel_put(&game->img, game->ray->x, y, game->map->ceiling_color);
 		y++;
 	}
 	while (y <= game->ray->draw_end)
@@ -51,7 +51,7 @@ static void	draw_vertical_line(t_game *game)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(&game->img, game->ray->x, y, 0x1900FF);
+		my_mlx_pixel_put(&game->img, game->ray->x, y, game->map->floor_color);
 		y++;
 	}
 }
