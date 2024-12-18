@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/17 12:58:45 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:02:00 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,25 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_texture // added
+{
+	void	*i;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_texture;
+
+typedef struct s_textures // added
+{
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
+}	t_textures;
+
 typedef struct s_game
 {
 	void		*p_mlx_init;
@@ -180,6 +199,7 @@ typedef struct s_game
 	t_ray		*ray;
 	t_map		*map;
 	t_ply		*ply;
+	t_textures	textures; //added
 }	t_game;
 
 
@@ -225,6 +245,11 @@ void	update_frame_time(t_game *game);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_draw.c
 void	cast_rays(t_game *game);
+
+// FUNCTION TEXTURING /-\ srcs/texturing/init_textures.c
+void	init_textures(t_game *game);
+unsigned int	get_texture_color(t_texture *texture, int x, int y);
+void	load_texture(t_game *game, t_texture *texture, char *path);
 
 // FUNCTION PLAYER /-\ srcs/player/intit_player_controls.c
 int 	ft_update_game(void *param);

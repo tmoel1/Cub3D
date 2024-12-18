@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:06:59 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/07 21:44:34 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:29:09 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	rotate_player(t_game *game, double angle)					// A AJOUTER
 		+ game->ply->plane_y * cos(angle);
 }
 
-int	mouse_move(int x, int y, void *param)					// A AJOUTER
+/*int	mouse_move(int x, int y, void *param)					// A AJOUTER
 {
 	t_game	*game;
 	int		deltax;
@@ -91,4 +91,4 @@ int	mouse_move(int x, int y, void *param)					// A AJOUTER
 		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window, MID_X, MID_Y);
 	}
 	return (0);
-}
+}*/

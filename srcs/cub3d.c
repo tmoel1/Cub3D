@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/17 12:59:06 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:29:28 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv) //too long
 	game.p_mlx_init = mlx_init();
 	if (!game.p_mlx_init)
 		return (EXIT_FAILURE);
+	init_textures(&game); // added
 	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WIN_WIDTH,
 			WIN_HEIGHT, WINDOW_TITLE);
 	if (!game.p_mlx_window)
@@ -79,8 +80,8 @@ int	main(int argc, char **argv) //too long
 		return (EXIT_FAILURE);
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
 		&game.img.line_len, &game.img.endian);
-	mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);			// A AJOUTER
-	mlx_hook(game.p_mlx_window, 6, (1L<<6), mouse_move, &game);					// A AJOUTER
+	//mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);			// A AJOUTER
+	//mlx_hook(game.p_mlx_window, 6, (1L<<6), mouse_move, &game);					// A AJOUTER
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	ft_hook(&game);
 	mlx_loop(game.p_mlx_init);
