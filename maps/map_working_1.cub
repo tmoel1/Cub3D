@@ -1,10 +1,10 @@
 C 70,40,1
 
 F                    34,130,34
-                NO                            ./game_assets/NO.xpm
-                             SO                                      ./game_assets/SO.xpm
-WE                                       ./game_assets/WE.xpm
-                            EA                                      ./game_assets/EA.xpm
+                NO                            ./assets/NO.xpm
+                             SO                                      ./assets/SO.xpm
+WE                                       ./assets/WE.xpm
+                            EA                                      ./assets/EA.xpm
 
  111111111 
  100000001 

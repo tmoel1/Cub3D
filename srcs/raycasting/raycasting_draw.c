@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 13:04:53 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:27:41 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	cast_rays(t_game *game)
 		draw_vertical_line(game, texture, tex_x);
 		game->ray->x++;
 	}
+	if (BONUS_VALUE == 1)
+		draw_minimap(game);
 	mlx_put_image_to_window(game->p_mlx_init,
 		game->p_mlx_window, game->img.i, 0, 0);
 }

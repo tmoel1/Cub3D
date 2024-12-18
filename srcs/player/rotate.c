@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:06:59 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 12:53:52 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:31:39 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,3 @@ void	rotate_player(t_game *game, double angle)
 	game->ply->plane_y = old_plane_x * sin(angle)
 		+ game->ply->plane_y * cos(angle);
 }
-
-/*int	mouse_move(int x, int y, void *param)					// A AJOUTER
-{
-	t_game	*game;
-	int		deltax;
-	double	angle;
-
-	(void)y;
-	game = (t_game *)param;
-	deltax = x - MID_X;
-	if (deltax != 0)
-	{
-		angle = deltax * game->ply->sensitivity;
-		rotate_player(game, angle);
-		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window, MID_X, MID_Y);
-	}
-	return (0);
-}*/

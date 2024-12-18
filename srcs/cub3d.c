@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 12:49:25 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:17:02 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 //new
 void	ft_hook(t_game *game)
 {
-	mlx_hook(game->p_mlx_window, 2, (1L<<0), &key_press, game);
-	mlx_hook(game->p_mlx_window, 3, (1L<<1), &key_release, game);
+	mlx_hook(game->p_mlx_window, 2, (1L << 0), &key_press, game);
+	mlx_hook(game->p_mlx_window, 3, (1L << 1), &key_release, game);
 	mlx_hook(game->p_mlx_window, 17, 0, &ft_destroy_cross, game);
 }
 
@@ -53,7 +53,7 @@ void	ft_init_main(t_game *game, char *argv)
 		game->map->map[i] = NULL;
 }
 
-int	main(int argc, char **argv) //too long
+int	main(int argc, char **argv)
 {
 	t_game	game;
 	t_map	map;
@@ -68,23 +68,21 @@ int	main(int argc, char **argv) //too long
 	init_player(&game);
 	ft_init_raycast(&game);
 	game.p_mlx_init = mlx_init();
-	if (!game.p_mlx_init)
-		return (EXIT_FAILURE);
-	init_textures(&game); // added
+	init_textures(&game);
 	game.p_mlx_window = mlx_new_window(game.p_mlx_init, WIN_WIDTH,
 			WIN_HEIGHT, WINDOW_TITLE);
-	if (!game.p_mlx_window)
-		return (EXIT_FAILURE);
 	game.img.i = mlx_new_image(game.p_mlx_init, WIN_WIDTH, WIN_HEIGHT);
-	if (!game.img.i)
+	if (!game.p_mlx_init || !game.p_mlx_window || !game.img.i)
 		return (EXIT_FAILURE);
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
-		&game.img.line_len, &game.img.endian);
-	//mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);			// A AJOUTER
-	//mlx_hook(game.p_mlx_window, 6, (1L<<6), mouse_move, &game);					// A AJOUTER
+			&game.img.line_len, &game.img.endian);
+	if (BONUS_VALUE == 1)
+	{
+		mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);
+		mlx_hook(game.p_mlx_window, 6, (1L << 6), mouse_move, &game);
+	}
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	ft_hook(&game);
 	mlx_loop(game.p_mlx_init);
 	return (0);
 }
-

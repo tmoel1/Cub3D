@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 11:02:00 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:15:37 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,20 @@
 # define WINDOW_TITLE "cub3d"
 # define WIN_WIDTH 2200
 # define WIN_HEIGHT 1080
-# define MID_X (WIN_WIDTH / 2)			// AJOUTEZ CETTE LIGNE APRES WIN_WIDTH
-# define MID_Y (WIN_HEIGHT / 2)			// AJOUTEZ CETTE LIGNE APRES WIN HEIGHT
+# define MID_X (WIN_WIDTH / 2)
+# define MID_Y (WIN_HEIGHT / 2)
 # define MAX_QUEUE_SIZE 1000
+# define COLLISION_BUFFER 0.2
 # define NUM_XPM_FILES 49
 # define PLY_POV 60
 # define PLY_ROTATE 0.04
 # define PLY_WALK 4
 # define M_PI 3.14159265358979323846
-
-#define NORTH_WALL_TEXTURE	0xFFFFFF // White
-#define SOUTH_WALL_TEXTURE	0xFF0000 // Red
-#define EAST_WALL_TEXTURE	0x00FF00 // Green
-#define WEST_WALL_TEXTURE	0x0000FF // Blue
-#define CEILING_COLOR		0x87CEEB // Sky blue
-#define FLOOR_COLOR			0x8B4513 // Brown
+# define TILES_SIZE 10
+# define PLAYER_SIZE 6
+# define MINIMAP_FLOOR	0x535065
+# define MINIMAP_PLAYER	0xADE917
+# define MINIMAP_WALL	0xB4AFA7
 
 /*
 KEY_LEFT: 97 == "A" key on the keyboard.
@@ -64,10 +63,6 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 # ifdef __linux__
 #  include "../minilibx-linux/mlx.h"
 #  define OS "linux"
-//#  define KEY_LEFT		97
-//#  define KEY_RIGHT		100
-//#  define KEY_UP       	119
-//#  define KEY_DOWN		115
 #  define KEY_W			119
 #  define KEY_A			97
 #  define KEY_S			115
@@ -82,7 +77,7 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 #  define OS "macos"
 #  define KEY_LEFT       0
 #  define KEY_RIGHT      2
-#  define KEY_UP 		13
+#  define KEY_UP		13
 #  define KEY_DOWN		1
 #  define KEY_ARROW_LEFT		123
 #  define KEY_ARROW_RIGHT		124
@@ -92,9 +87,9 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 # endif
 
 // DEBUG MACROS
-# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+/*# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
 	__FILE__, __LINE__, getpid())
-/*# define PI(x) fprintf(stderr, "PI: %d\n", (x));
+# define PI(x) fprintf(stderr, "PI: %d\n", (x));
 # define PS(x) fprintf(stderr, "PS: %s\n", (x));
 # define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
 # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
@@ -106,22 +101,20 @@ typedef struct s_ply
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
-	double	plane_x; // Vecteur de plan de camera X
-	double	plane_y; // Vecteur de plan de camera Y
+	double	plane_x;
+	double	plane_y;
 	double	frame_time;
 	double	move_speed;
 	double	rotate_speed;
 	double	time;
 	double	old_time;
-	double	sensitivity;			// AJOUTEZ CETTE LIGNE
-
+	double	sensitivity;
 	bool	w;
 	bool	a;
 	bool	s;
 	bool	d;
 	bool	right;
 	bool	left;
-
 	float	dir_angle;
 	float	pov_rad;
 	float	angle;
@@ -171,7 +164,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_texture // added
+typedef struct s_texture
 {
 	void	*i;
 	char	*addr;
@@ -182,7 +175,7 @@ typedef struct s_texture // added
 	int		endian;
 }	t_texture;
 
-typedef struct s_textures // added
+typedef struct s_textures
 {
 	t_texture	north;
 	t_texture	south;
@@ -199,10 +192,30 @@ typedef struct s_game
 	t_ray		*ray;
 	t_map		*map;
 	t_ply		*ply;
-	t_textures	textures; //added
+	t_textures	textures;
 }	t_game;
 
+typedef struct s_move
+{
+	double	next_x;
+	double	next_y;
+	int		map_height;
+	int		check_x;
+	int		check_y;
+	int		row_length;
+}	t_move;
 
+typedef struct s_coord
+{
+	int	x;
+	int	y;
+}	t_coord;
+
+# ifdef BONUS
+#  define BONUS_VALUE 1
+# else
+#  define BONUS_VALUE 0
+# endif
 
 // FUNCTION CUB3D /-\ srcs/cub3d.c
 void	ft_init_main(t_game *game, char *argv);
@@ -252,10 +265,15 @@ unsigned int	get_texture_color(t_texture *texture, int x, int y);
 void	load_texture(t_game *game, t_texture *texture, char *path);
 
 // FUNCTION PLAYER /-\ srcs/player/intit_player_controls.c
-int 	ft_update_game(void *param);
+int		ft_update_game(void *param);
 void	init_player(t_game *game);
 
 // FUNCTION PLAYER /-\ srcs/player/player_movement.c
+void	init_move(t_move *move, t_game *game, double dir_x, double dir_y);
+void	check_horizontal(t_move *move, t_game *game, double dir_x);
+void	check_vertical(t_move *move, t_game *game, double dir_y);
+
+// FUNCTION PLAYER /-\ srcs/player/player_init_movement.c
 void	move_forward(t_game *game);
 void	move_backwards(t_game *game);
 void	move_left(t_game *game);
@@ -268,8 +286,8 @@ void	rotate_player(t_game *game, double angle);				// A AJOUTER
 int		mouse_move(int x, int y, void *param);					// A AJOUTER
 
 // FUNCTION PLAYER /-\ srcs/player/keys.c
-int	key_release(int keycode, void *param);
-int	key_press(int keycode, void *param);
+int		key_release(int keycode, void *param);
+int		key_press(int keycode, void *param);
 
 // FUNCTION UTILS /-\ srcs/utils/function_utils.c
 int		ft_strlen_find(char *str, char c);
@@ -284,5 +302,11 @@ bool	ft_only_espace(const char *line);
 bool	ft_only_iswall(const char *line);
 int		ft_malloc_size(char *argv);
 int		ft_check_dir(t_map *map);
+
+// FUNCTION BONUS /-\ srcs/bonus/minimap.c
+void	draw_minimap(t_game *game);
+void	chose_color_tiles_and_draw_it(t_game *game,
+			t_coord coord, t_coord pixel);
+int		ft_isspace(char c);
 
 #endif
