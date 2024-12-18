@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:00:26 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/17 13:57:50 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:50:57 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,7 @@ void	ft_check_espace(t_map *map, int i, bool norgb)
 			return ;
 		if ((ft_isdigit(map->line[i]) && !norgb) || (map->line[i] == ','
 				&& ft_isdigit(map->line[i - 1]) && !norgb))
-		{
 			return ;
-			/*if (ft_isdigit(map->line[i]))
-				c_rgb += 1;
-			ft_check_rgb_color(map, i, &c_rgb, &c_separate);*/
-		}
 		else if (!(map->line[i] == ' ' || map->line[i] == '\t'
 				|| map->line[i] == '\n'))
 			ft_error_dir(map, 'I', i);

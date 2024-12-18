@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:07:41 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/07 17:09:02 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:52:49 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 //new
 int	key_press(int keycode, void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game	*game;
 
+	game = (t_game *)param;
 	if (keycode == KEY_ESC)
 		ft_destroy_cross(game);
 	else if (keycode == KEY_W)
@@ -39,8 +40,9 @@ int	key_press(int keycode, void *param)
 //new
 int	key_release(int keycode, void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game	*game;
 
+	game = (t_game *)param;
 	if (keycode == KEY_W)
 		game->ply->w = false;
 	else if (keycode == KEY_S)

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:50 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/08 13:22:22 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:50:05 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	ft_verify_map(t_game *game, int count)
 	{
 		i = -1;
 		count++;
-		if (ft_only_espace(game->map->map[k]) || ft_strlen(game->map->map[k]) == 0)
+		if (ft_only_espace(game->map->map[k])
+			|| ft_strlen(game->map->map[k]) == 0)
 			ft_error("Empty line between map", count);
 		while (game->map->map[k][++i] != '\0')
 		{

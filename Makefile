@@ -19,6 +19,7 @@ SRC_2 = srcs/errors/errors.c \
 	srcs/parsing/verify_direction.c \
 	srcs/parsing/verify_map.c \
 	srcs/raycasting/raycasting_calcul.c \
+	srcs/raycasting/raycasting_calcul_bis.c \
 	srcs/raycasting/raycasting_draw.c \
 	srcs/raycasting/raycasting_init.c \
 	srcs/texturing/init_textures.c \

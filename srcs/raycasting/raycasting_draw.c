@@ -3,35 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:00:27 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 10:58:55 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:04:53 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	choose_wall_texture(t_game *game, t_texture **selected_texture, int *tex_x)
+static void	conditiontextures(t_game *game, t_texture **selected_texture)
+{
+	if (game->ray->side == 0)
+	{
+		if (game->ray->raydirx > 0)
+			*selected_texture = &game->textures.west;
+		else
+			*selected_texture = &game->textures.east;
+	}
+	else
+	{
+		if (game->ray->raydiry > 0)
+			*selected_texture = &game->textures.north;
+		else
+			*selected_texture = &game->textures.south;
+	}
+}
+
+static void	choose_wall_texture(t_game *game,
+t_texture **selected_texture, int *tex_x)
 {
 	double	wall_x;
 
 	if (game->ray->side == 0)
-		wall_x = game->ply->pos_y + game->ray->perpwalldist * game->ray->raydiry;
+		wall_x = game->ply->pos_y + game->ray->perpwalldist
+			* game->ray->raydiry;
 	else
-		wall_x = game->ply->pos_x + game->ray->perpwalldist * game->ray->raydirx;
+		wall_x = game->ply->pos_x + game->ray->perpwalldist
+			* game->ray->raydirx;
 	wall_x -= floor(wall_x);
-
 	*tex_x = (int)(wall_x * (double)game->textures.north.width);
 	if (game->ray->side == 0 && game->ray->raydirx > 0)
 		*tex_x = game->textures.north.width - *tex_x - 1;
 	if (game->ray->side == 1 && game->ray->raydiry < 0)
 		*tex_x = game->textures.north.width - *tex_x - 1;
-
-	if (game->ray->side == 0)
-		*selected_texture = game->ray->raydirx > 0 ? &game->textures.west : &game->textures.east;
-	else
-		*selected_texture = game->ray->raydiry > 0 ? &game->textures.north : &game->textures.south;
+	conditiontextures(game, selected_texture);
 }
 
 static void	draw_vertical_line(t_game *game, t_texture *texture, int tex_x)
@@ -43,14 +59,12 @@ static void	draw_vertical_line(t_game *game, t_texture *texture, int tex_x)
 	unsigned int	color;
 
 	step = 1.0 * texture->height / game->ray->line_height;
-	tex_pos = (game->ray->draw_start - WIN_HEIGHT / 2 + game->ray->line_height / 2) * step;
-
-	// Draw ceiling
+	tex_pos = (game->ray->draw_start - WIN_HEIGHT / 2
+			+ game->ray->line_height / 2) * step;
 	y = 0;
 	while (y < game->ray->draw_start)
-		my_mlx_pixel_put(&game->img, game->ray->x, y++, game->map->ceiling_color);
-
-	// Draw wall texture
+		my_mlx_pixel_put(&game->img, game->ray->x, y++,
+			game->map->ceiling_color);
 	while (y <= game->ray->draw_end)
 	{
 		tex_y = (int)tex_pos & (texture->height - 1);
@@ -58,13 +72,9 @@ static void	draw_vertical_line(t_game *game, t_texture *texture, int tex_x)
 		color = get_texture_color(texture, tex_x, tex_y);
 		my_mlx_pixel_put(&game->img, game->ray->x, y++, color);
 	}
-
-	// Draw floor
 	while (y < WIN_HEIGHT)
 		my_mlx_pixel_put(&game->img, game->ray->x, y++, game->map->floor_color);
 }
-
-
 
 /*
 static void	choose_wall_texture(t_game *game)
@@ -133,12 +143,11 @@ void	cast_rays(t_game *game)
 		draw_vertical_line(game, texture, tex_x);
 		game->ray->x++;
 	}
-	mlx_put_image_to_window(game->p_mlx_init, game->p_mlx_window, game->img.i, 0, 0);
+	mlx_put_image_to_window(game->p_mlx_init,
+		game->p_mlx_window, game->img.i, 0, 0);
 }
 
-
-/*
-void	cast_rays(t_game *game)
+/*void	cast_rays(t_game *game)
 {
 	update_frame_time(game);
 	game->ray->x = 0;
@@ -153,7 +162,8 @@ void	cast_rays(t_game *game)
 		draw_vertical_line(game);
 		game->ray->x++;
 	}
-	mlx_put_image_to_window(game->p_mlx_init, game->p_mlx_window, game->img.i, 0, 0);
+	mlx_put_image_to_window(game->p_mlx_init,
+	game->p_mlx_window, game->img.i, 0, 0);
 }
 // the "main" of raycasting engine
 // loops across horizontally and applies all the raycasting functions to
