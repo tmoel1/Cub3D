@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:13:02 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/27 09:34:15 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:19:31 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_error_dir(t_map *map, char c, int i)
 	{
 		while (k < 6)
 		{
-			if (map->directions[k] == NULL)
+			if (map->dir[k] == NULL)
 				(printf("Error: Missing direction\n"), exit(EXIT_FAILURE));
 			k++;
 		}

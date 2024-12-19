@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:57:21 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/11/27 09:36:06 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:59:41 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 void	ft_dir_base(t_map *map, int *count, int index, int size)
 {
+	int	i;
+	int	count_rgb;
+
+	i = -1;
+	count_rgb = 0;
 	count[index]++;
 	if (count[index] > 1)
+		(printf("Error: Duplicate direction: line %d\n", count[6]),
+			exit(EXIT_FAILURE));
+	if (map->dir[index] == NULL)
 	{
-		printf("Error: Duplicate direction: line %d\n", count[6]);
-		exit(EXIT_FAILURE);
-	}
-	if (map->directions[index] == NULL)
-	{
-		map->directions[index] = ft_substr(map->line, size,
+		map->dir[index] = ft_substr(map->line, size,
 				ft_strlen(map->line) - size - 1);
-		printf("map->directions[%d]: %s\n", index, map->directions[index]);
+		printf("map->dir[%d]: %s\n", index, map->dir[index]);
+		if (index == 4 || index == 5)
+		{
+			ft_find_rgb(map, index, i, count_rgb);
+		}
 	}
 }
 
