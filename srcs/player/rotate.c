@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:06:59 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 23:31:39 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:56:46 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// from Andy
 
 void	rotate_right(t_game *game)
 {

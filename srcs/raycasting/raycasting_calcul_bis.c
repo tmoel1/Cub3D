@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_calcul_bis.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:12:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 13:13:51 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:57:01 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ void	update_frame_time(t_game *game)
 	game->ply->move_speed = game->ply->frame_time * 5.0;
 	game->ply->rotate_speed = game->ply->frame_time * 3.0;
 }
-//!!!!!! might look at adjusting/optimising move_speed and rotate_speed ??

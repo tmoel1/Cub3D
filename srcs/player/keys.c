@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:07:41 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 12:52:49 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:56:34 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//from Andy
-
-//new
 int	key_press(int keycode, void *param)
 {
 	t_game	*game;
@@ -37,7 +34,6 @@ int	key_press(int keycode, void *param)
 	return (0);
 }
 
-//new
 int	key_release(int keycode, void *param)
 {
 	t_game	*game;
