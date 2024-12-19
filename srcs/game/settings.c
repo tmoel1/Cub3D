@@ -6,17 +6,40 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:18:24 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 14:17:22 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:37:29 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void cleanup_and_exit(t_game *game)
+static void	finish_cleanup(t_game *game)
 {
 	int	i;
 
 	i = 0;
+	if (game->map->map)
+	{
+		while (game->map->map[i])
+		{
+			free(game->map->map[i]);
+			i++;
+		}
+		free(game->map->map);
+	}
+	i = 0;
+	if (game->map->dir)
+	{
+		while (i < 6)
+		{
+			free(game->map->dir[i]);
+			i++;
+		}
+		free(game->map->dir);
+	}
+}
+
+static void	cleanup_and_exit(t_game *game)
+{
 	if (game->textures.north.i)
 		mlx_destroy_image(game->p_mlx_init, game->textures.north.i);
 	if (game->textures.south.i)
@@ -34,21 +57,7 @@ static void cleanup_and_exit(t_game *game)
 			mlx_destroy_display(game->p_mlx_init);
 		free(game->p_mlx_init);
 	}
-	if (game->map->map)
-	{
-		for (i = 0; game->map->map[i]; i++)
-			free(game->map->map[i]);
-		free(game->map->map);
-	}
-	if (game->map->dir)
-	{
-		for (i = 0; i < 6; i++)
-		{
-			if (game->map->dir[i])
-				free(game->map->dir[i]);
-		}
-		free(game->map->dir);
-	}
+	finish_cleanup(game);
 }
 
 // Function to quit the game when the red cross is pressed
