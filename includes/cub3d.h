@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 21:15:37 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:33:15 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@
 # define WINDOW_TITLE "cub3d"
 # define WIN_WIDTH 2200
 # define WIN_HEIGHT 1080
-# define MID_X (WIN_WIDTH / 2)
-# define MID_Y (WIN_HEIGHT / 2)
 # define MAX_QUEUE_SIZE 1000
 # define COLLISION_BUFFER 0.2
 # define NUM_XPM_FILES 49
@@ -185,6 +183,8 @@ typedef struct s_textures
 
 typedef struct s_game
 {
+	int			mid_x;
+	int			mid_y;
 	void		*p_mlx_init;
 	void		*p_mlx_window;
 	void		*ptr_to_image;
@@ -218,95 +218,97 @@ typedef struct s_coord
 # endif
 
 // FUNCTION CUB3D /-\ srcs/cub3d.c
-void	ft_init_main(t_game *game, char *argv);
+void			ft_init_main(t_game *game, char *argv);
 
 // FUNCTION ERROR /-\ srcs/error/error.c
-void	ft_error(char *str, int count);
-void	ft_error_dir(t_map *map, char c, int i);
-void	ft_error_rgb(void);
+void			ft_error(char *str, int count);
+void			ft_error_dir(t_map *map, char c, int i);
+void			ft_error_rgb(void);
 
 // FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
-int		ft_destroy_escape(int keysim, t_game *game);
-int		ft_destroy_cross(t_game *game);
-int		ft_resize_window(t_map *map);
+int				ft_destroy_escape(int keysim, t_game *game);
+int				ft_destroy_cross(t_game *game);
+int				ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
-int		ft_parse_base(t_game *game, int argc, char **argv);
+int				ft_parse_base(t_game *game, int argc, char **argv);
 //void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
-int		ft_rgb_to_hex(int red, int green, int blue);
-void	ft_find_rgb(t_map *map, int index, int i, int count_rgb);
+int				ft_rgb_to_hex(int red, int green, int blue);
+void			ft_find_rgb(t_map *map, int index, int i, int count_rgb);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
-void	ft_map_route(t_game *game, int count);
+void			ft_map_route(t_game *game, int count);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_direction.c
-void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction);
+void			ft_init_dir(t_map *map, char *line,
+					int *count, bool *out_direction);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_map.c
-void	ft_verify_map(t_game *game, int count);
+void			ft_verify_map(t_game *game, int count);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_init.c
-void	ft_init_raycast(t_game *game);
-void	ft_init(t_game *game);
-void	ft_dda_algo(t_game *game);
+void			ft_init_raycast(t_game *game);
+void			ft_init(t_game *game);
+void			ft_dda_algo(t_game *game);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_calcul.c
-void	perp_init(t_game *game);
-void	process_dda(t_game *game);
-void	calculate_line_height(t_game *game);
-void	update_frame_time(t_game *game);
+void			perp_init(t_game *game);
+void			process_dda(t_game *game);
+void			calculate_line_height(t_game *game);
+void			update_frame_time(t_game *game);
 
 // FUNCTION RAYCASTING /-\ srcs/raycasting/raycasting_draw.c
-void	cast_rays(t_game *game);
+void			cast_rays(t_game *game);
 
 // FUNCTION TEXTURING /-\ srcs/texturing/init_textures.c
-void	init_textures(t_game *game);
+void			init_textures(t_game *game);
 unsigned int	get_texture_color(t_texture *texture, int x, int y);
-void	load_texture(t_game *game, t_texture *texture, char *path);
+void			load_texture(t_game *game, t_texture *texture, char *path);
 
 // FUNCTION PLAYER /-\ srcs/player/intit_player_controls.c
-int		ft_update_game(void *param);
-void	init_player(t_game *game);
+int				ft_update_game(void *param);
+void			init_player(t_game *game);
 
 // FUNCTION PLAYER /-\ srcs/player/player_movement.c
-void	init_move(t_move *move, t_game *game, double dir_x, double dir_y);
-void	check_horizontal(t_move *move, t_game *game, double dir_x);
-void	check_vertical(t_move *move, t_game *game, double dir_y);
+void			init_move(t_move *move, t_game *game,
+					double dir_x, double dir_y);
+void			check_horizontal(t_move *move, t_game *game, double dir_x);
+void			check_vertical(t_move *move, t_game *game, double dir_y);
 
 // FUNCTION PLAYER /-\ srcs/player/player_init_movement.c
-void	move_forward(t_game *game);
-void	move_backwards(t_game *game);
-void	move_left(t_game *game);
-void	move_right(t_game *game);
+void			move_forward(t_game *game);
+void			move_backwards(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
 
 // FUNCTION PLAYER /-\ srcs/player/rotate.c
-void	rotate_left(t_game *game);
-void	rotate_right(t_game *game);
-void	rotate_player(t_game *game, double angle);				// A AJOUTER
-int		mouse_move(int x, int y, void *param);					// A AJOUTER
+void			rotate_left(t_game *game);
+void			rotate_right(t_game *game);
+void			rotate_player(t_game *game, double angle);
+int				mouse_move(int x, int y, void *param);
 
 // FUNCTION PLAYER /-\ srcs/player/keys.c
-int		key_release(int keycode, void *param);
-int		key_press(int keycode, void *param);
+int				key_release(int keycode, void *param);
+int				key_press(int keycode, void *param);
 
 // FUNCTION UTILS /-\ srcs/utils/function_utils.c
-int		ft_strlen_find(char *str, char c);
-int		ft_count_index(char **input);
-double	get_time(void);
+int				ft_strlen_find(char *str, char c);
+int				ft_count_index(char **input);
+double			get_time(void);
 
 // FUNCTION UTILS MLX /-\ srcs/utils-mlx/function_mlx.c
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 // FUNCTION UTILS /-\ srcs/utils/parsing_utils.c
-bool	ft_only_espace(const char *line);
-bool	ft_only_iswall(const char *line);
-int		ft_malloc_size(char *argv);
-int		ft_check_dir(t_map *map);
+bool			ft_only_espace(const char *line);
+bool			ft_only_iswall(const char *line);
+int				ft_malloc_size(char *argv);
+int				ft_check_dir(t_map *map);
 
 // FUNCTION BONUS /-\ srcs/bonus/minimap.c
-void	draw_minimap(t_game *game);
-void	chose_color_tiles_and_draw_it(t_game *game,
-			t_coord coord, t_coord pixel);
-int		ft_isspace(char c);
+void			draw_minimap(t_game *game);
+void			chose_color_tiles_and_draw_it(t_game *game,
+					t_coord coord, t_coord pixel);
+int				ft_isspace(char c);
 
 #endif

@@ -6,11 +6,20 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 23:17:02 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:32:00 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	ft_bonus(t_game *game)
+{
+	if (BONUS_VALUE == 1)
+	{
+		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window, MID_X, MID_Y);
+		mlx_hook(game->p_mlx_window, 6, (1L << 6), mouse_move, game);
+	}
+}
 
 //new
 void	ft_hook(t_game *game)
@@ -36,6 +45,8 @@ void	ft_init_main(t_game *game, char *argv)
 	game->map->dir = malloc(sizeof(char *) * 6);
 	game->map->floor_color = 0;
 	game->map->ceiling_color = 0;
+	game->mid_x = WIN_WIDTH / 2;
+	game->mid_y = WIN_HEIGHT / 2;
 	game->ply->pos_x = 0.0;
 	game->ply->pos_y = 0.0;
 	game->ply->dir_angle = 0.0;
@@ -76,13 +87,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
 			&game.img.line_len, &game.img.endian);
-	if (BONUS_VALUE == 1)
-	{
-		mlx_mouse_move(game.p_mlx_init, game.p_mlx_window, MID_X, MID_Y);
-		mlx_hook(game.p_mlx_window, 6, (1L << 6), mouse_move, &game);
-	}
+	ft_bonus(&game);
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
-	ft_hook(&game);
-	mlx_loop(game.p_mlx_init);
+	(ft_hook(&game), mlx_loop(game.p_mlx_init));
 	return (0);
 }
