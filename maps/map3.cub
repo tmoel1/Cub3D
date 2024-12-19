@@ -1,9 +1,9 @@
-NO ./img/512debug/nord.xpm
-SO ./img/512debug/sud.xpm
-WE ./img/512debug/west.xpm
-EA ./img/512debug/est.xpm
+NO ./assets/NO.xpm
+SO ./assets/SO.xpm
+WE ./assets/WE.xpm
+EA ./assets/EA.xpm
 
-F 164.59.249
+F 164,59,249
 C 255,25,50
 
 
