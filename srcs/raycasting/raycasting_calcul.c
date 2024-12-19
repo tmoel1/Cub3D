@@ -6,12 +6,11 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 13:07:03 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:21:12 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <ctype.h>
 
 void	perp_init(t_game *game)
 {

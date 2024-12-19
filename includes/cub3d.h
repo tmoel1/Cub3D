@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 10:33:15 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:22:37 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,6 @@ void			ft_error_dir(t_map *map, char c, int i);
 void			ft_error_rgb(void);
 
 // FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
-int				ft_destroy_escape(int keysim, t_game *game);
 int				ft_destroy_cross(t_game *game);
 int				ft_resize_window(t_map *map);
 

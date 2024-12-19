@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:21:48 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/17 13:02:21 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:19:31 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,3 @@ void	ft_find_rgb(t_map *map, int index, int i, int count_rgb)
 	}
 	ft_convert_rgb(map, index, rgb, c_separate);
 }
-
-/*void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate)
-{
-	if (map->line[i] > '2' && *c_rgb == 1
-		&& ft_isdigit(map->line[i + 1]) && ft_isdigit(map->line[i + 2]))
-		ft_error_dir(map, 'I', i);
-	else if ((map->line[i] > '5' && *c_rgb == 2 && ft_isdigit(map->line[i + 1]
-				&& map->line[i - 1] == '2')) || (map->line[i] > '5'
-			&& *c_rgb == 3 && map->line[i - 2] == '2'))
-		ft_error_dir(map, 'I', i);
-	if (map->line[i] == ',' && (*c_rgb >= 1 && *c_rgb <= 3))
-	{
-		*c_rgb = 0;
-		*c_separate += 1;
-	}
-	else if (*c_rgb > 3 || (i == ft_strlen(map->line) && *c_separate != 2))
-		ft_error_rgb();
-}*/

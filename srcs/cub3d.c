@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 14:03:31 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:18:50 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,5 @@ int	main(int argc, char **argv)
 	ft_bonus(&game);
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	(ft_hook(&game), mlx_loop(game.p_mlx_init));
-	/*
-	if (game.p_mlx_window)
-	{
-		mlx_destroy_window(game.p_mlx_init, game.p_mlx_window); // added
-		if (game.p_mlx_init)
-			mlx_destroy_display(game.p_mlx_init); // added
-	}
-	free(game.p_mlx_init); //added, miht need if statement for all these
-	*/
 	return (0);
 }
-
-// mlx_destroy_window(game.p_mlx_init and game.p_mlx_window)

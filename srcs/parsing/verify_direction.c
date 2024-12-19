@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_direction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:57:21 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 12:32:27 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:19:51 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_dir_base(t_map *map, int *count, int index, int size)
 	}
 }
 
-// Modifier peut-etre car premiere ligne return invalid direction
 void	ft_init_dir(t_map *map, char *line, int *count, bool *out_direction)
 {
 	if (ft_only_iswall(line) && !*out_direction)

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   verify_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:09:50 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 12:50:05 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:20:12 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//Supprimer les parantheses si rien a rajouter + ce comm
 void	ft_init_coords(t_map *map, t_game *game, int k, int i)
 {
 	if (map->map[k][i] == 'N' || map->map[k][i] == 'S'
