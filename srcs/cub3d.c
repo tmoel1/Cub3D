@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 10:32:00 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:10:10 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_bonus(t_game *game)
 {
 	if (BONUS_VALUE == 1)
 	{
-		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window, MID_X, MID_Y);
+		mlx_mouse_move(game->p_mlx_init, game->p_mlx_window,
+			game->mid_x, game->mid_y);
 		mlx_hook(game->p_mlx_window, 6, (1L << 6), mouse_move, game);
 	}
 }
