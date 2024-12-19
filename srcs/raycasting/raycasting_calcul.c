@@ -6,7 +6,7 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:31:37 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 12:57:22 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:07:03 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,3 +106,7 @@ void	calculate_line_height(t_game *game)
 	if (game->ray->draw_end >= WIN_HEIGHT)
 		game->ray->draw_end = WIN_HEIGHT - 1;
 }
+
+// for determining the height of the vertical slice of wall to be drawn
+// basically what makes walls "further away" drawn smaller and vice versa
+// if statements act as out-of-bounds checks

@@ -6,15 +6,11 @@
 /*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:12:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 12:57:01 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:06:45 by tmoeller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// for determining the height of the vertical slice of wall to be drawn
-// basically what makes walls "further away" drawn smaller and vice versa
-// if statements act as out-of-bounds checks
 
 double	get_time(void)
 {
