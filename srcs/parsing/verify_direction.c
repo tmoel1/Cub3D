@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:57:21 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/17 12:59:41 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:32:27 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_dir_base(t_map *map, int *count, int index, int size)
 	{
 		map->dir[index] = ft_substr(map->line, size,
 				ft_strlen(map->line) - size - 1);
-		printf("map->dir[%d]: %s\n", index, map->dir[index]);
 		if (index == 4 || index == 5)
 		{
 			ft_find_rgb(map, index, i, count_rgb);

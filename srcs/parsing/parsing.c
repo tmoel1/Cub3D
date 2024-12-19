@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 12:50:35 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:31:55 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	ft_init_map(t_map *map, bool out_direction, int *i)
 		&& map->dir[5] != NULL)
 	{
 		map->map[++(*i)] = ft_substr(map->line, 0, ft_strlen(map->line));
-		printf("%d\n", ft_strlen(map->map[*i]));
-		printf("map[%d]: %s\n", *i, map->map[*i]);
 	}
 }
 
