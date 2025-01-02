@@ -1,22 +1,94 @@
-==1505440== Memcheck, a memory error detector
-==1505440== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1505440== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==1505440== Command: ./cub3D maps/error55.cub
-==1505440== 
-Error: Invalid character after direction: "."
-==1505440== 
-==1505440== HEAP SUMMARY:
-==1505440==     in use at exit: 375 bytes in 8 blocks
-==1505440==   total heap usage: 43,612 allocs, 43,604 frees, 613,505 bytes allocated
-==1505440== 
-==1505440== LEAK SUMMARY:
-==1505440==    definitely lost: 0 bytes in 0 blocks
-==1505440==    indirectly lost: 0 bytes in 0 blocks
-==1505440==      possibly lost: 0 bytes in 0 blocks
-==1505440==    still reachable: 375 bytes in 8 blocks
-==1505440==         suppressed: 0 bytes in 0 blocks
-==1505440== Reachable blocks (those to which a pointer was found) are not shown.
-==1505440== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==1505440== 
-==1505440== For lists of detected and suppressed errors, rerun with: -s
-==1505440== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==31181== Memcheck, a memory error detector
+==31181== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31181== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==31181== Command: ./cub3D maps/error57.cub
+==31181== 
+Error: Invalid map: line 13
+==31181== 
+==31181== HEAP SUMMARY:
+==31181==     in use at exit: 372 bytes in 13 blocks
+==31181==   total heap usage: 8,722 allocs, 8,709 frees, 65,156 bytes allocated
+==31181== 
+==31181== 9 bytes in 1 blocks are still reachable in loss record 1 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1111A2: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 12 bytes in 1 blocks are still reachable in loss record 2 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x111165: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 25 bytes in 1 blocks are still reachable in loss record 3 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x111065: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 25 bytes in 1 blocks are still reachable in loss record 4 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1110A5: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 25 bytes in 1 blocks are still reachable in loss record 5 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1110E5: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 25 bytes in 1 blocks are still reachable in loss record 6 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110F9E: ft_dir_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x111125: ft_init_dir (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110334: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 48 bytes in 1 blocks are still reachable in loss record 7 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x10FAE0: ft_init_main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104A9: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 74 bytes in 5 blocks are still reachable in loss record 8 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x1141C4: ft_substr (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110260: ft_init_map (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x110351: ft_init_parsing (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104C3: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== 129 bytes in 1 blocks are still reachable in loss record 9 of 9
+==31181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31181==    by 0x10FACB: ft_init_main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x1104A9: ft_parse_base (in /home/haru/dev/42/Cub3D/cub3D)
+==31181==    by 0x10FC7E: main (in /home/haru/dev/42/Cub3D/cub3D)
+==31181== 
+==31181== LEAK SUMMARY:
+==31181==    definitely lost: 0 bytes in 0 blocks
+==31181==    indirectly lost: 0 bytes in 0 blocks
+==31181==      possibly lost: 0 bytes in 0 blocks
+==31181==    still reachable: 372 bytes in 13 blocks
+==31181==         suppressed: 0 bytes in 0 blocks
+==31181== 
+==31181== For lists of detected and suppressed errors, rerun with: -s
+==31181== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

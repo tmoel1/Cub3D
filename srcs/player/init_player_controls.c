@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_controls.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:04:30 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/19 12:56:20 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:20:11 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ int	ft_update_game(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	controls(game);
-	cast_rays(game);
+	if (game->b_menu)
+	{
+		controls(game);
+		cast_rays(game);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:41:19 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/03/27 19:33:22 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/27 00:20:17 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ free the buffer and return NULL. Otherwise, return the buffer.
 get_next_line: Check if the parameters are valid. If yes,
 call process_stash. Otherwise, free the buffer and return NULL.
 */
-char	*get_next_line(int fd);
-
 char	*fill_buffer(int fd)
 {
 	char	*buffer;

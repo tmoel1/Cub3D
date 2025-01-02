@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 14:22:37 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:22:37 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 #  define KEY_ARROW_UP			65362
 #  define KEY_ARROW_DOWN		65364
 #  define KEY_ESC				65307
+#  define KEY_SPACE				32
 # elif __APPLE__
 #  include "../minilibx_opengl_20191021/mlx.h"
 #  define OS "macos"
@@ -82,6 +83,7 @@ KEY_ESC: 65307 == "ESC" (escape) key on the keyboard.
 #  define KEY_ARROW_UP			126
 #  define KEY_ARROW_DOWN		125
 #  define KEY_ESC				53
+#  define KEY_SPACE				49
 # endif
 
 // DEBUG MACROS
@@ -114,8 +116,6 @@ typedef struct s_ply
 	bool	right;
 	bool	left;
 	float	dir_angle;
-	float	pov_rad;
-	float	angle;
 }	t_ply;
 
 typedef struct s_ray
@@ -183,8 +183,11 @@ typedef struct s_textures
 
 typedef struct s_game
 {
+	void		*img_menu;
 	int			mid_x;
 	int			mid_y;
+	bool		b_menu;
+	int			index_map;
 	void		*p_mlx_init;
 	void		*p_mlx_window;
 	void		*ptr_to_image;
@@ -221,25 +224,23 @@ typedef struct s_coord
 void			ft_init_main(t_game *game, char *argv);
 
 // FUNCTION ERROR /-\ srcs/error/error.c
-void			ft_error(char *str, int count);
-void			ft_error_dir(t_map *map, char c, int i);
+void			ft_error(t_game *game, char *str, int count);
+void			ft_error_dir(t_game *game, char c, int i);
 void			ft_error_rgb(void);
 
 // FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
 int				ft_destroy_cross(t_game *game);
-int				ft_resize_window(t_map *map);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing.c
 int				ft_parse_base(t_game *game, int argc, char **argv);
-//void	ft_check_rgb_color(t_map *map, int i, int *c_rgb, int *c_separate);
 int				ft_rgb_to_hex(int red, int green, int blue);
-void			ft_find_rgb(t_map *map, int index, int i, int count_rgb);
+void			ft_find_rgb(t_game *game, int index, int i, int count_rgb);
 
 // FUNCTION PARSING /-\ srcs/parsing/parsing_map.c
 void			ft_map_route(t_game *game, int count);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_direction.c
-void			ft_init_dir(t_map *map, char *line,
+void			ft_init_dir(t_game *game, char *line,
 					int *count, bool *out_direction);
 
 // FUNCTION PARSING /-\ srcs/parsing/verify_map.c
@@ -302,12 +303,17 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 bool			ft_only_espace(const char *line);
 bool			ft_only_iswall(const char *line);
 int				ft_malloc_size(char *argv);
-int				ft_check_dir(t_map *map);
+int				ft_check_dir(t_game *game);
 
 // FUNCTION BONUS /-\ srcs/bonus/minimap.c
 void			draw_minimap(t_game *game);
 void			chose_color_tiles_and_draw_it(t_game *game,
 					t_coord coord, t_coord pixel);
 int				ft_isspace(char c);
+
+// FUNCTION UI /-\ srcs/ui/main_menu.c
+void			ft_main_menu(t_game *game);
+int				ft_mouse_click(int button, int x, int y, void *param);
+int				ft_space_press(int keycode, void *param);
 
 #endif

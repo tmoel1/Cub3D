@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:00:26 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/18 12:50:57 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:03:47 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ bool	ft_only_espace(const char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] != ' ' && line[i] != '\t'
-			&& line[0] != '\n')
+		if (line[i] != ' ' && line[0] != '\n')
 			return (false);
 		i++;
 	}
@@ -74,46 +73,47 @@ bool	ft_only_iswall(const char *line)
 	return (false);
 }
 
-void	ft_check_espace(t_map *map, int i, bool norgb)
+void	ft_check_espace(t_game *game, int i, bool norgb)
 {
 	i += 2;
-	while (map->line[i] != '\0')
+	while (game->map->line[i] != '\0')
 	{
-		if (map->line[i] == '.' && map->line[i + 1] == '/' && norgb)
+		if (game->map->line[i] == '.' && game->map->line[i + 1] == '/' && norgb)
 			return ;
-		if ((ft_isdigit(map->line[i]) && !norgb) || (map->line[i] == ','
-				&& ft_isdigit(map->line[i - 1]) && !norgb))
+		if ((ft_isdigit(game->map->line[i]) && !norgb)
+			|| (game->map->line[i] == ','
+				&& ft_isdigit(game->map->line[i - 1]) && !norgb))
 			return ;
-		else if (!(map->line[i] == ' ' || map->line[i] == '\t'
-				|| map->line[i] == '\n'))
-			ft_error_dir(map, 'I', i);
+		else if (!(game->map->line[i] == ' ' || game->map->line[i] == '\t'
+				|| game->map->line[i] == '\n'))
+			ft_error_dir(game, 'I', i);
 		i++;
 	}
 }
 
-int	ft_check_dir(t_map *map)
+int	ft_check_dir(t_game *game)
 {
 	int	i;
 
 	i = -1;
-	while (map->line && map->line[++i] != '\0')
+	while (game->map->line && game->map->line[++i] != '\0')
 	{
-		if (map->line[i] == 'N' && map->line[i + 1] == 'O'
-			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i, true), 0);
-		else if (map->line[i] == 'S' && map->line[i + 1] == 'O'
-			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i, true), 1);
-		else if (map->line[i] == 'W' && map->line[i + 1] == 'E'
-			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i, true), 2);
-		else if (map->line[i] == 'E' && map->line[i + 1] == 'A'
-			&& map->line[i + 2] == ' ')
-			return (ft_check_espace(map, i, true), 3);
-		else if (map->line[i] == 'F' && map->line[i + 1] == ' ')
-			return (ft_check_espace(map, i, false), 4);
-		else if (map->line[i] == 'C' && map->line[i + 1] == ' ')
-			return (ft_check_espace(map, i, false), 5);
+		if (game->map->line[i] == 'N' && game->map->line[i + 1] == 'O'
+			&& game->map->line[i + 2] == ' ')
+			return (ft_check_espace(game, i, true), 0);
+		else if (game->map->line[i] == 'S' && game->map->line[i + 1] == 'O'
+			&& game->map->line[i + 2] == ' ')
+			return (ft_check_espace(game, i, true), 1);
+		else if (game->map->line[i] == 'W' && game->map->line[i + 1] == 'E'
+			&& game->map->line[i + 2] == ' ')
+			return (ft_check_espace(game, i, true), 2);
+		else if (game->map->line[i] == 'E' && game->map->line[i + 1] == 'A'
+			&& game->map->line[i + 2] == ' ')
+			return (ft_check_espace(game, i, true), 3);
+		else if (game->map->line[i] == 'F' && game->map->line[i + 1] == ' ')
+			return (ft_check_espace(game, i, false), 4);
+		else if (game->map->line[i] == 'C' && game->map->line[i + 1] == ' ')
+			return (ft_check_espace(game, i, false), 5);
 	}
 	return (-1);
 }

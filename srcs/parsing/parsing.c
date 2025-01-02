@@ -6,20 +6,22 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:58:35 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 12:31:55 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:46:00 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_init_map(t_map *map, bool out_direction, int *i)
+void	ft_init_map(t_game *game, bool out_direction, int *i)
 {
-	if (out_direction && map->dir[0] != NULL
-		&& map->dir[1] != NULL && map->dir[2] != NULL
-		&& map->dir[3] != NULL && map->dir[4] != NULL
-		&& map->dir[5] != NULL)
+	if (out_direction && game->map->dir[0] != NULL
+		&& game->map->dir[1] != NULL && game->map->dir[2] != NULL
+		&& game->map->dir[3] != NULL && game->map->dir[4] != NULL
+		&& game->map->dir[5] != NULL)
 	{
-		map->map[++(*i)] = ft_substr(map->line, 0, ft_strlen(map->line));
+		game->index_map++;
+		game->map->map[++(*i)] = ft_substr(game->map->line,
+				0, ft_strlen(game->map->line));
 	}
 }
 
@@ -41,12 +43,12 @@ void	ft_init_parsing(t_game *game, char *argv)
 	game->map->line = get_next_line(fd);
 	while (game->map->line != NULL)
 	{
-		ft_init_dir(game->map, game->map->line, count, &out_direction);
-		ft_init_map(game->map, out_direction, &i);
+		ft_init_dir(game, game->map->line, count, &out_direction);
+		ft_init_map(game, out_direction, &i);
 		(free(game->map->line), game->map->line = get_next_line(fd));
 	}
-	close(fd);
-	ft_error_dir(game->map, 'D', 0);
+	(free(game->map->line), close(fd));
+	ft_error_dir(game, 'D', 0);
 	if (!out_direction)
 		(printf("Error: No map\n"), exit(EXIT_FAILURE));
 	ft_map_route(game, count[6]);

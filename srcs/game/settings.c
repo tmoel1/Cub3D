@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:18:24 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 14:37:29 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:08:17 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	cleanup_and_exit(t_game *game)
 		mlx_destroy_image(game->p_mlx_init, game->textures.west.i);
 	if (game->img.i)
 		mlx_destroy_image(game->p_mlx_init, game->img.i);
+	if (game->img_menu)
+		mlx_destroy_image(game->p_mlx_init, game->img_menu);
 	if (game->p_mlx_window)
 	{
 		mlx_destroy_window(game->p_mlx_init, game->p_mlx_window);

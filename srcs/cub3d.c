@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoeller <tmoeller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:06:45 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/19 14:18:50 by tmoeller         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:40:46 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_bonus(t_game *game)
 
 void	ft_hook(t_game *game)
 {
+	mlx_mouse_hook(game->p_mlx_window, &ft_mouse_click, game);
 	mlx_hook(game->p_mlx_window, 2, (1L << 0), &key_press, game);
 	mlx_hook(game->p_mlx_window, 3, (1L << 1), &key_release, game);
 	mlx_hook(game->p_mlx_window, 17, 0, &ft_destroy_cross, game);
@@ -41,22 +42,22 @@ void	ft_init_main(t_game *game, char *argv)
 
 	i = -1;
 	game->map->map = malloc(sizeof(char *) * ft_malloc_size(argv) + 1);
-	game->map->line = NULL;
 	game->map->dir = malloc(sizeof(char *) * 6);
-	game->map->floor_color = 0;
-	game->map->ceiling_color = 0;
-	game->mid_x = WIN_WIDTH / 2;
-	game->mid_y = WIN_HEIGHT / 2;
-	game->ply->pos_x = 0.0;
-	game->ply->pos_y = 0.0;
-	game->ply->dir_angle = 0.0;
-	game->ply->angle = 0.0;
-	game->ply->pov_rad = 0.0;
-	if (!game->map->dir)
+	if (!game->map->dir || !game->map->map)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+	game->map->line = NULL;
+	game->map->floor_color = 0;
+	game->map->ceiling_color = 0;
+	game->index_map = 0;
+	game->mid_x = WIN_WIDTH / 2;
+	game->mid_y = WIN_HEIGHT / 2;
+	game->b_menu = false;
+	game->ply->pos_x = 0.0;
+	game->ply->pos_y = 0.0;
+	game->ply->dir_angle = 0.0;
 	while (++i < 6)
 		game->map->dir[i] = NULL;
 	i = -1;
@@ -88,6 +89,7 @@ int	main(int argc, char **argv)
 	game.img.addr = mlx_get_data_addr(game.img.i, &game.img.bpp,
 			&game.img.line_len, &game.img.endian);
 	ft_bonus(&game);
+	ft_main_menu(&game);
 	mlx_loop_hook(game.p_mlx_init, &ft_update_game, &game);
 	(ft_hook(&game), mlx_loop(game.p_mlx_init));
 	return (0);

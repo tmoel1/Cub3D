@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:10:51 by tmoeller          #+#    #+#             */
-/*   Updated: 2024/12/18 12:50:21 by shmoreno         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:58:28 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	load_texture(t_game *game, t_texture *texture, char *path)
 	texture->i = mlx_xpm_file_to_image(game->p_mlx_init, path,
 			&texture->width, &texture->height);
 	if (!texture->i)
-		ft_error("Failed to load texture", 0);
+		ft_error(game, "Failed to load texture", 0);
 	texture->addr = mlx_get_data_addr(texture->i,
 			&texture->bpp, &texture->line_len, &texture->endian);
 }

@@ -30,6 +30,7 @@ SRC_2 = srcs/errors/errors.c \
 	srcs/player/rotate.c \
 	srcs/utils/function_utils.c \
 	srcs/utils/parsing_utils.c \
+	srcs/ui/main_menu.c \
 	srcs/utils-mlx/function_mlx.c
 BONUS = srcs/bonus/minimap.c \
 		srcs/bonus/mouse_rotate.c 

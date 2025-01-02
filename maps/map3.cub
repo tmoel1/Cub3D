@@ -1,10 +1,10 @@
-NO ./assets/NO.xpm
-SO ./assets/SO.xpm
-WE ./assets/WE.xpm
-EA ./assets/EA.xpm
+NO ./assets/textures/NO.xpm
+SO ./assets/textures/SO.xpm
+WE ./assets/textures/WE.xpm
+EA ./assets/textures/EA.xpm
 
-F 164,59,249
-C 255,25,50
+F 131,131,131
+C 70,70,70
 
 
 
