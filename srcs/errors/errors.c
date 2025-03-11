@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:13:02 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/21 15:07:26 by shmoreno         ###   ########.fr       */
+/*   Updated: 2025/03/11 20:56:05 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	ft_free_ptr(t_game *game)
 {
-	if (game->map->line != NULL)
-	{
-		free(game->map->line);
-		game->map->line = NULL;
-	}
 	if (game->map->dir != NULL)
 	{
 		free(game->map->dir);
@@ -29,6 +24,11 @@ void	ft_free_ptr(t_game *game)
 		free(game->map->map);
 		game->map->map = NULL;
 	}
+	if (game->map->line != NULL)
+	{
+		free(game->map->line);
+		game->map->line = NULL;
+	}
 }
 
 void	ft_free_all(t_game *game)
@@ -36,9 +36,9 @@ void	ft_free_all(t_game *game)
 	int	i;
 
 	i = -1;
-	while (++i < game->index_map)
+	while (++i < (game->index_map))
 	{
-		if (game->map->map != NULL && game->map->map[i] != NULL)
+		if (game->map->map[i] != NULL)
 		{
 			free(game->map->map[i]);
 			game->map->map[i] = NULL;
@@ -47,7 +47,7 @@ void	ft_free_all(t_game *game)
 	i = -1;
 	while (++i < 6)
 	{
-		if (game->map->dir != NULL && game->map->dir[i] != NULL)
+		if (game->map->dir[i] != NULL)
 		{
 			free(game->map->dir[i]);
 			game->map->dir[i] = NULL;
@@ -90,8 +90,9 @@ void	ft_error_dir(t_game *game, char c, int i)
 	}
 }
 
-void	ft_error_rgb(void)
+void	ft_error_rgb(t_game *game)
 {
 	printf("Error: Invalid RGB, absolute path or RGB color code\n");
+	ft_free_all(game);
 	exit(EXIT_FAILURE);
 }

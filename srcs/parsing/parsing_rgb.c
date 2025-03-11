@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:21:48 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/21 13:08:15 by shmoreno         ###   ########.fr       */
+/*   Updated: 2025/03/11 20:45:12 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_convert_rgb(t_game *game, int index, int *rgb, int c_separate)
 
 	i = -1;
 	if (c_separate != 2)
-		ft_error_rgb();
+		ft_error_rgb(game);
 	while (++i < 3)
 	{
 		if (rgb[i] < 0 || rgb[i] > 255)
-			ft_error_rgb();
+			ft_error_rgb(game);
 	}
 	if (index == 4)
 		game->map->floor_color = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
@@ -63,7 +63,7 @@ void	ft_find_rgb(t_game *game, int index, int i, int count_rgb)
 			if (game->map->dir[index][i] == ',')
 				c_separate++;
 			if (c_separate > 3)
-				ft_error_rgb();
+				ft_error_rgb(game);
 			ft_substr_rgb(game, index, i, count_rgb);
 			rgb[++k] = ft_atoi(game->map->tmp);
 			(free(game->map->tmp), count_rgb = 0);
@@ -71,7 +71,7 @@ void	ft_find_rgb(t_game *game, int index, int i, int count_rgb)
 		else if (ft_isdigit(game->map->dir[index][i]))
 			count_rgb++;
 		else
-			ft_error_rgb();
+			ft_error_rgb(game);
 	}
 	ft_convert_rgb(game, index, rgb, c_separate);
 }

@@ -6,7 +6,7 @@
 /*   By: shmoreno <shmoreno@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:03:40 by shmoreno          #+#    #+#             */
-/*   Updated: 2024/12/21 13:22:37 by shmoreno         ###   ########.fr       */
+/*   Updated: 2025/03/11 20:44:53 by shmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ void			ft_init_main(t_game *game, char *argv);
 // FUNCTION ERROR /-\ srcs/error/error.c
 void			ft_error(t_game *game, char *str, int count);
 void			ft_error_dir(t_game *game, char c, int i);
-void			ft_error_rgb(void);
+void			ft_error_rgb(t_game *game);
 
 // FUNCTION GAME SETTINGS /-\ srcs/game/settings.c
 int				ft_destroy_cross(t_game *game);
