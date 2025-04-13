@@ -394,7 +394,7 @@ X11 (Install: sudo apt-get install libx11-dev libxext-dev xorg-dev)
 Write the build Instruction here.-->
 
 ## Notes
-<img src="readme/115.png" alt="Notes" width="400"/>
+<img src="readme/115.png" alt="Notes" width="200"/>
 
 ## Credits
 
