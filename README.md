@@ -1,112 +1,21 @@
-<img src="readme/cub3d.png" alt="cub3d" width="900"/>
-
 # Cub3D
-**The Cub3D project is a C-based implementation of a 3D rendering engine using raycasting, a technique similar to the one used in classic games like <ins>Wolfenstein 3D</ins>. The main goal is to create a three-dimensional maze from a 2D map, allowing the player to navigate an immersive environment with a first-person perspective.**<br>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+Well, sort of 2D+ in truth...
 
-## 📒 Index
+_Co-created with @HaruSnak_
 
-- [About](#about)
-- [Approach](#approach)
-- [Installation](#installation)
-- [Development](#development)
-  - [Pre-Requisites](#pre-requisites)
-  - [File Structure](#file-structure)
- <!-- - [Diagram Architecture](#diagram-architecture)  -->
-- [Notes](#notes)
-- [Credits](#credits)
 
-## About
 
-The heart of the project lies in parsing a configuration file (*.cub*) that defines the map structure, wall textures, floor and ceiling colors, as well as the player's starting position. Once the map is validated, the program uses a raycasting algorithm to project walls in 3D on the screen, calculating distances and angles to simulate realistic perspective. The MiniLibX library (or an alternative depending on constraints) is used to display graphics and handle keyboard/mouse interactions.<br>
+**_Below is an abbreviated presentation of the project – for a more complete tour, see: https://github.com/HaruSnak/Cub3D/_**
 
-**<ins>The mandatory features include:</ins>**<br>
-*• Wall collision*<br>
-*• A minimap system*<br>
-*• Doors that can be opened/closed*<br>
-*• Animations (animated sprites)*<br>
-*• Rotate the viewpoint with the mouse*<br>
+---
 
-Bonus features can be added to enhance the experience, like a 2D minimap, openable doors, animated sprites, or even light and shadow effects.<br>
-
-## Approach
-
-<ins>**Approach and Collaboration**</ins><br>
-This project proved particularly challenging to manage as a team. As with <ins>**Minishell**</ins>, I got ahead of my teammate and began development alone. This dynamic slightly complicated task distribution, leading me to implement the majority of the project autonomously.<br>
-
-<ins>**Parsing: The Technical Challenge**</ins><br>
-**I structured the development around rigorous parsing, an essential prerequisite for establishing a robust test suite. The specific complexities included:**<br>
-
-* *Handling adjacent maps within the same file*<br>
-
-* *Supporting variable map sizes*<br>
-
-* *Validating empty spaces (only permitted when surrounded by '1' walls)*<br>
-
-<ins>**Development Pipeline**</ins><br>
-**Once parsing was finalized:**<br>
-
-* *Graphical Assets: I selected external resources which I modified in Photoshop to optimize visual rendering.*<br>
-
-* *Raycasting Integration: My teammate (<ins>**tmoel1**</ins>) joined the project at this phase:*<br>
-
-* *He took charge of finalizing the algorithm*<br>
-
-* *Implemented directional movements (WASD) + collision*<br>
+## So, what is this project about?
+The final C project in 42's main cursus, Cub3D, is an implementation of a '3D' rendering engine using raycasting, a technique similar to the one used in classic games like _Wolfenstein_. The main goal is to create a three-dimensional maze from a 2D map, allowing the player to navigate an immersive environment from a first-person perspective. The program first enforces strict parsing of the maps, then the engine relies on a series of calculations to accurately project the rays outwards both horizontally and vertically in real time, giving the impression of a 3D map. The visual component was done largely through using MiniLibX, itself an API of sorts for X11, as imposed by the subject requirements.
 
 ![game](readme/game.gif)
 
-<ins>**Additional Features (BONUS):**</ins><br>
-
-* *Added an interactive minimap*<br>
-
-* *Integrated mouse control via a dedicated function*<br>
-
-<ins>**Quality Validation**</ins><br>
-**To ensure robustness, we:**<br>
-
-* *Developed an exhaustive test suite with varied maps*<br>
-
-* *Systematically verified edge cases in the parser*<br>
-
-## Installation
-```bash
-# Clone this repository
-$ git clone https://github.com/HaruSnak/Cub3D.git
-
-# Go into the repository
-$ cd Cub3D
-
-# To compile the program
-$ make
-
-# To compile the program + bonus
-$ make bonus
-
-# Execution example
-$ ./cub3D [MAP_NAME] (Ex: ./cub3D maps/map1.cub)
-
-# Removes all generated files and the executable for a thorough cleanup.
-$ make fclean
-
-# Removes generated object files and the executable.
-$ make clean
-```
-
-## Development
-### Pre-Requisites
-```
-Requirements for Linux
-
-X11 (Install: sudo apt-get install libx11-dev libxext-dev xorg-dev)
-```
-
-### File Structure
+## Sounds fairly simple actually, so how is it laid out?
 
 ```
 .
@@ -389,28 +298,6 @@ X11 (Install: sudo apt-get install libx11-dev libxext-dev xorg-dev)
     └── README.md
     └── valgrind_output.txt
 ```
+So yeah, just like that really.
 
-<!--### Diagram Architecture
-Write the build Instruction here.-->
-
-## Notes
-<img src="readme/115.png" alt="Notes" width="200"/>
-
-## Credits
-
-Below you will find the links used for this project:
-
-- [Norm 42](https://cdn.intra.42.fr/pdf/pdf/960/norme.en.pdf)
-- [Raycasting - Lode Vandevenne](https://lodev.org/cgtutor/raycasting.html)
-
-[contributors-shield]: https://img.shields.io/github/contributors/HaruSnak/Cub3D.svg?style=for-the-badge
-[contributors-url]: https://github.com/HaruSnak/Cub3D/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/HaruSnak/Cub3D.svg?style=for-the-badge
-[forks-url]: https://github.com/HaruSnak/Cub3D/network/members
-[stars-shield]: https://img.shields.io/github/stars/HaruSnak/Cub3D.svg?style=for-the-badge
-[stars-url]: https://github.com/HaruSnak/Cub3D/stargazers
-[issues-shield]: https://img.shields.io/github/issues/HaruSnak/Cub3D.svg?style=for-the-badge
-[issues-url]: https://github.com/HaruSnak/Cub3D/issues
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/shany-moreno-5a863b2aa
-
+_Try it out if you like - feedback welcome_!
